@@ -15,6 +15,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         //HolaMorta
+        //Hey
     }
     public void calendario(View view){
         EditText et=findViewById(R.id.fecha_registro);
