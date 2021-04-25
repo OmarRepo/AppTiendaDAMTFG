@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AppTienda</string>
+    <string name="registro">Registro</string>
+    <string name="acceder">Acceder</string>
+    <string name="registrar">Registrarse</string>
+    <string name="correo">Correo</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="fecha_n">Fecha de Nacimiento</string>
+
+    Nombre
+</resources>
