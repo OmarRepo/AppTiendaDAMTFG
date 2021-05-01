@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Registro"
+    tools:context=".Registro2"
     android:gravity="center">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:text="@string/nombre"
+        android:text="@string/direccion"
         android:textColor="@color/azul_letra"
         android:textSize="20sp"
         android:paddingLeft="8dp"
@@ -21,14 +21,14 @@
         />
 
     <EditText
-        android:id="@+id/nombre_registro"
+        android:id="@+id/direccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/azul_letra"
         android:ems="10"
         android:inputType="textPersonName"
-        android:maxLength="20"
+        android:maxLength="50"
         android:maxLines="1"
         android:textSize="25sp"
         android:layout_marginLeft="16dp"
@@ -40,21 +40,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:text="@string/apellido"
+        android:text="@string/ciudad"
         android:textColor="@color/azul_letra"
         android:textSize="20sp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
-
+    <!-- La longitud es 45 por el gran pueblo de  gargantilla del lozoya y pinilla de buitrago(es solo 1, no 2)-->
     <EditText
-        android:id="@+id/apellidos_registro"
+        android:id="@+id/ciudad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/azul_letra"
         android:ems="10"
         android:inputType="textPersonName"
-        android:maxLength="40"
+        android:maxLength="50"
         android:maxLines="1"
         android:textSize="25sp"
         android:layout_marginLeft="16dp"
@@ -64,51 +64,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:text="@string/tlf"
+        android:text="@string/cod_postal"
         android:textColor="@color/azul_letra"
         android:textSize="20sp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
 
     <EditText
-        android:id="@+id/tlf"
+        android:id="@+id/cod_postal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/azul_letra"
         android:ems="10"
         android:inputType="number"
-        android:maxLength="9"
+        android:maxLength="5"
         android:maxLines="1"
         android:textSize="25sp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="@string/fecha_n"
-        android:textColor="@color/azul_letra"
-        android:textSize="20sp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"/>
-
-    <EditText
-        android:id="@+id/fecha_registro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/azul_letra"
-        android:clickable="true"
-        android:ems="10"
-        android:focusable="false"
-        android:inputType="date"
-        android:onClick="calendario"
-        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="16dp"
-            android:onClick="ir_pag2"
+            android:onClick="ir_pag3"
             app:srcCompat="@drawable/ic_arrow_forward_ios" />
 
     </LinearLayout>

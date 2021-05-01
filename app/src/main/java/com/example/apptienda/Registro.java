@@ -3,6 +3,7 @@ package com.example.apptienda;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -21,6 +22,10 @@ public class Registro extends AppCompatActivity {
     public void calendario(View view){
         EditText et=findViewById(R.id.fecha_registro);
         showDatePickerDialog(et);
+    }
+    public void ir_pag2(View V){
+        Intent it=new Intent(this,Registro2.class);
+        startActivity(it);
     }
 
     private void showDatePickerDialog(EditText et) {

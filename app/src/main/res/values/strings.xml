@@ -9,6 +9,15 @@
     <string name="apellido">Apellido</string>
     <string name="fecha_n">Fecha de Nacimiento</string>
     <string name="tlf">Teléfono</string>
+    <string name="direccion">Dirección</string>
+    <string name="cod_postal">Código Postal</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="title_activity_registro2">Registro2</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 
 
     Nombre
