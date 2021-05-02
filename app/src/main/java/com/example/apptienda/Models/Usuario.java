@@ -1,8 +1,27 @@
-package com.example.apptienda.model;
+package com.example.apptienda.Models;
 
-import android.provider.ContactsContract;
+import android.util.Log;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.example.apptienda.App;
+import com.example.apptienda.Helpers.SingletonRequestQueue;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Usuario {
     private String nombre;
@@ -142,12 +161,84 @@ public class Usuario {
     }
     public static boolean RegistrarUsuario(Usuario usuario,String password) {
         boolean result=false;
-
+        Gson gson= new Gson();
+        try {
+            String usuarioJson = gson.toJson(usuario,Usuario.class);
+            String hash=getPassHass(password);
+            String url="";
+            JSONObject usuarioObject = new JSONObject(usuarioJson);
+            usuarioObject.put("hash",hash);
+            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.i(getClass().getSimpleName(),response.toString());
+                        }
+                    }
+                    ,
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i(getClass().getSimpleName(),error.toString());
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return  result;
+    }
+    /*public static boolean RegistrarUsuario(Usuario usuario,String password) {
+        AtomicBoolean result= new AtomicBoolean(false);
+        Gson gson= new Gson();
+        try {
+            String usuarioJson = gson.toJson(usuario,Usuario.class);
+            String hash=getPassHass(password);
+            String url="";
+            JSONObject usuarioObject = new JSONObject(usuarioJson);
+            usuarioObject.put("hash",hash);
+            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST,url,usuarioObject,
+                    response -> result.set(true)
+                    ,
+                    error -> result.set(false));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result.get();
+    }*/
+    public static Usuario logIn(String user,String password){
+        try {
+            JSONObject logData = new JSONObject();
+            logData.put("user",user);
+            logData.put("hash",getPassHass(password));
+        }catch (JSONException e) {
+            Log.e("Json parseado error","Error:",e);
+        }
+            return null;
     }
     public static boolean ModificarUsuario() {
         boolean result=false;
 
         return  result;
+    }
+
+    public static String getPassHass(String input) {
+        try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+
+                byte[] messageDigest = md.digest(input.getBytes());
+
+                BigInteger no = new BigInteger(1, messageDigest);
+
+                String hash = no.toString(16);
+                while (hash.length() < 32) {
+                    hash = "0" + hash;
+                }
+                return hash;
+            }
+        catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+        }
     }
 }
