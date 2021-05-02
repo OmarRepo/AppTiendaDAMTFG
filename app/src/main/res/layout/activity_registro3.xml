@@ -78,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="16dp"
+            android:onClick="fin_registro"
             app:srcCompat="@drawable/ic_arrow_forward_ios" />
 
     </LinearLayout>

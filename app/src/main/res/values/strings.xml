@@ -15,6 +15,8 @@
     <string name="title_activity_registro2">Registro2</string>
     <string name="toast_rellenar_campos">Rellena todos los campos para continuar</string>
     <string name="toast_tamano_tlf">Introduzca un número de teléfono válido(9 números)</string>
+    <string name="toast_tamano_postal">Introduzca un código postal  válido(5 números)</string>
+    <string name="toast_formato_correo">Introduzca un formato de correo válido(@dominio.extension)</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

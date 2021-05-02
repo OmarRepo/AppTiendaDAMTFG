@@ -30,13 +30,13 @@ public class Registro extends AppCompatActivity {
         showDatePickerDialog(et);
     }
     public void ir_pag2(View V){
-        if(name.getText().length()!=0||apellido.getText().length()!=0||tlf.getText().length()!=0||fecha.getText().length()!=0){
+        if(name.getText().length()!=0 && apellido.getText().length()!=0 && tlf.getText().length()!=0 && fecha.getText().length()!=0){
             if(tlf.getText().length()==9) {
                 Intent it = new Intent(this, Registro2.class);
-                it.putExtra("nombre",name.getText());
-                it.putExtra("apellido",apellido.getText());
-                it.putExtra("tlf",tlf.getText());
-                it.putExtra("fecha",fecha.getText());
+                it.putExtra("nombre",name.getText().toString());
+                it.putExtra("apellido",apellido.getText().toString());
+                it.putExtra("tlf",tlf.getText().toString());
+                it.putExtra("fecha",fecha.getText().toString());
                 startActivity(it);
             }
             else {
