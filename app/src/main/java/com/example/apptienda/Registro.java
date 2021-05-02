@@ -8,13 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Registro extends AppCompatActivity {
+    EditText name,apellido,tlf,fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        name=findViewById(R.id.nombre_registro);
+        apellido=findViewById(R.id.apellidos_registro);
+        tlf=findViewById(R.id.tlf);
+        fecha=findViewById(R.id.fecha_registro);
         //HolaMorta
         //Hey
         //o.o funciona
@@ -24,8 +30,24 @@ public class Registro extends AppCompatActivity {
         showDatePickerDialog(et);
     }
     public void ir_pag2(View V){
-        Intent it=new Intent(this,Registro2.class);
-        startActivity(it);
+        if(name.getText().length()!=0||apellido.getText().length()!=0||tlf.getText().length()!=0||fecha.getText().length()!=0){
+            if(tlf.getText().length()==9) {
+                Intent it = new Intent(this, Registro2.class);
+                it.putExtra("nombre",name.getText());
+                it.putExtra("apellido",apellido.getText());
+                it.putExtra("tlf",tlf.getText());
+                it.putExtra("fecha",fecha.getText());
+                startActivity(it);
+            }
+            else {
+                Toast.makeText(this, R.string.toast_tamano_tlf, Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        else {
+            Toast.makeText(this, R.string.toast_rellenar_campos, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void showDatePickerDialog(EditText et) {
