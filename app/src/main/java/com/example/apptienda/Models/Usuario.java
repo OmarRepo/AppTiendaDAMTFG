@@ -159,8 +159,7 @@ public class Usuario {
                 ", ciudad='" + ciudad + '\'' +
                 '}';
     }
-    public static boolean RegistrarUsuario(Usuario usuario,String password) {
-        boolean result=false;
+    public static void RegistrarUsuario(Usuario usuario,String password,final VolleyCallback callback) {
         Gson gson= new Gson();
         try {
             String usuarioJson = gson.toJson(usuario,Usuario.class);
@@ -174,6 +173,7 @@ public class Usuario {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i(getClass().getSimpleName(),response.toString());
+                            callback.onSuccessResponse(response.toString());
                         }
                     }
                     ,
@@ -186,7 +186,6 @@ public class Usuario {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return  result;
     }
     /*public static boolean RegistrarUsuario(Usuario usuario,String password) {
         AtomicBoolean result= new AtomicBoolean(false);
@@ -207,20 +206,57 @@ public class Usuario {
         }
         return result.get();
     }*/
-    public static Usuario logIn(String user,String password){
+    public static void LogIn(String usuario,String password, final VolleyCallback callback){
         try {
             JSONObject logData = new JSONObject();
-            logData.put("user",user);
+            logData.put("user",usuario);
             logData.put("hash",getPassHass(password));
+            String url="";
+            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.i(getClass().getSimpleName(),response.toString());
+                            callback.onSuccessResponse(response.toString());
+                        }
+                    }
+                    ,
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i(getClass().getSimpleName(),error.toString());
+                        }
+                    });
         }catch (JSONException e) {
             Log.e("Json parseado error","Error:",e);
         }
-            return null;
     }
-    public static boolean ModificarUsuario() {
-        boolean result=false;
-
-        return  result;
+    public static void ModificarUsuario(Usuario usuario,final VolleyCallback callback) {
+        Gson gson= new Gson();
+        try {
+            String usuarioJson = gson.toJson(usuario,Usuario.class);
+            JSONObject logData = new JSONObject(usuarioJson);
+            String url="";
+            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.i(getClass().getSimpleName(),response.toString());
+                            callback.onSuccessResponse(response.toString());
+                        }
+                    }
+                    ,
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i(getClass().getSimpleName(),error.toString());
+                        }
+                    });
+        }catch (JSONException e) {
+            Log.e("Json parseado error","Error:",e);
+        }
     }
 
     public static String getPassHass(String input) {
