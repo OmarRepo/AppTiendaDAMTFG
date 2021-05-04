@@ -1,6 +1,8 @@
 package com.example.apptienda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -10,9 +12,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apptienda.databinding.ActivityMainBinding;
+import com.example.apptienda.databinding.ActivityRegistroBinding;
+import com.example.apptienda.viewModels.FullViewModel;
+import com.example.apptienda.viewModels.LoginViewModel;
+
 public class Registro extends AppCompatActivity {
     EditText name,apellido,tlf,fecha;
-
+    FullViewModel vm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +28,8 @@ public class Registro extends AppCompatActivity {
         apellido=findViewById(R.id.apellidos_registro);
         tlf=findViewById(R.id.tlf);
         fecha=findViewById(R.id.fecha_registro);
+        vm=new ViewModelProvider(getViewModelStore(),ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(FullViewModel.class);
+        ActivityRegistroBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_registro);
         //HolaMorta
         //Hey
         //o.o funciona

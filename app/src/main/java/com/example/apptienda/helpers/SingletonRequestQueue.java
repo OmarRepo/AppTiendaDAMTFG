@@ -1,4 +1,4 @@
-package com.example.apptienda.Helpers;
+package com.example.apptienda.helpers;
 
 import android.content.Context;
 

@@ -1,5 +1,7 @@
-package com.example.apptienda.Models;
+package com.example.apptienda.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.math.BigInteger;
@@ -11,19 +13,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.example.apptienda.App;
-import com.example.apptienda.Helpers.SingletonRequestQueue;
+import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Usuario {
+public class Usuario implements Parcelable {
     private String nombre;
     private String apellidos;
     private String correo;
@@ -60,6 +59,9 @@ public class Usuario {
      * Constructor sin parametros para usar durante el registro
      */
     public Usuario() {
+    }
+    public Usuario(Parcel in) {
+        readFromParceable(in);
     }
 
     public String getNombre() {
@@ -166,7 +168,8 @@ public class Usuario {
             String hash=getPassHass(password);
             String url="";
             JSONObject usuarioObject = new JSONObject(usuarioJson);
-            usuarioObject.put("hash",hash);
+            usuarioObject.put("hash_pash",hash);
+            usuarioObject.put("action","register");
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
                     new Response.Listener<JSONObject>() {
@@ -206,13 +209,15 @@ public class Usuario {
         }
         return result.get();
     }*/
-    public static void LogIn(String usuario,String password, final VolleyCallback callback){
+    public static void LogIn(String email,String password, final VolleyCallback callback){
         try {
             JSONObject logData = new JSONObject();
-            logData.put("user",usuario);
-            logData.put("hash",getPassHass(password));
-            String url="";
+            logData.put("email",email);
+            logData.put("hash_pass",getPassHass(password));
+            logData.put("action","login");
+            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            Log.i("POSTTEST",logData.toString());
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -225,9 +230,11 @@ public class Usuario {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i(getClass().getSimpleName(),error.toString());
+                            Log.i(getClass().getSimpleName(),error.toString()+"aquixd");
                         }
                     });
+            Log.i("POSTTEST2",request.toString());
+            queue.add(request);
         }catch (JSONException e) {
             Log.e("Json parseado error","Error:",e);
         }
@@ -237,6 +244,7 @@ public class Usuario {
         try {
             String usuarioJson = gson.toJson(usuario,Usuario.class);
             JSONObject logData = new JSONObject(usuarioJson);
+            logData.put("action","register");
             String url="";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
@@ -267,14 +275,59 @@ public class Usuario {
 
                 BigInteger no = new BigInteger(1, messageDigest);
 
-                String hash = no.toString(16);
+                StringBuilder hash = new StringBuilder(no.toString(16));
                 while (hash.length() < 32) {
-                    hash = "0" + hash;
+                    hash.insert(0, "0");
                 }
-                return hash;
+                return hash.toString();
+                //Deberiamos de evitar concatenar en bucles por temas de rendimiento
+                //return hash.toString();
+                //String hash = no.toString(16);
+                //while (hash.length() < 32) {
+                //    hash ="0"+hash;
+                //}
+                //return hash;
             }
         catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nombre);
+        dest.writeString(apellidos);
+        dest.writeString(correo);
+        dest.writeString(fechaNacimiento);
+        dest.writeString(email);
+        dest.writeString(telefono);
+        dest.writeString(calle);
+        dest.writeString(ciudad);
+    }
+    private void readFromParceable(Parcel in) {
+        this.nombre=in.readString();
+        this.apellidos=in.readString();
+        this.correo=in.readString();
+        this.fechaNacimiento=in.readString();
+        this.email=in.readString();
+        this.telefono=in.readString();
+        this.calle=in.readString();
+        this.ciudad=in.readString();
+    }
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 }

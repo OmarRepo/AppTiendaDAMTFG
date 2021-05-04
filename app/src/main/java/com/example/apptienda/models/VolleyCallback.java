@@ -1,4 +1,4 @@
-package com.example.apptienda.Models;
+package com.example.apptienda.models;
 
 
 import org.json.JSONObject;

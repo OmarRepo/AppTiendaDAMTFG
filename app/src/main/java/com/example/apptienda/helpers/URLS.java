@@ -1,4 +1,4 @@
-package com.example.apptienda.Helpers;
+package com.example.apptienda.helpers;
 
 public enum URLS {
     domain("el dominio donde tenemos el servidor php"),

@@ -1,10 +1,9 @@
-package com.example.apptienda.ViewModels;
+package com.example.apptienda.viewModels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.apptienda.Models.Usuario;
-import com.example.apptienda.Models.VolleyCallback;
-import com.google.gson.JsonObject;
+import com.example.apptienda.models.Usuario;
+import com.example.apptienda.models.VolleyCallback;
 
 import org.json.JSONObject;
 
@@ -16,6 +15,8 @@ public class FullViewModel extends ViewModel {
     }
     public FullViewModel() {
         super();
+        usuario=new MutableLiveData<Usuario>();
+        usuario.setValue(new Usuario());
     }
     public void registerUser() {
         Usuario.RegistrarUsuario(usuario.getValue(), password.getValue(), new VolleyCallback() {

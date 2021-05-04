@@ -1,55 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:gravity="center"
-    android:layout_margin="16dp">
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/azul_letra"
-        android:hint="@string/correo"
-        android:maxLines="1"
-        android:textColor="@color/black" />
-
-    <EditText
-        android:id="@+id/pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/azul_letra"
-        android:hint="@string/contraseña"
-        android:maxLines="1"
-        android:textColor="@color/azul_letra" />
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.apptienda.viewModels.LoginViewModel" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_margin="16dp">
 
-        <Button
-            android:id="@+id/Login"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="@string/acceder" />
+            android:backgroundTint="@color/azul_letra"
+            android:hint="@string/correo"
+            android:text="@={viewModel.Email}"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/black" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTintMode="screen">
 
-        <Button
-            android:id="@+id/registrar"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/contraseña"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="@={viewModel.Password}"
+                android:textColor="@color/azul_letra" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:text="@string/registrar"
-            android:onClick="registrarse"/>
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/Login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:onClick="login"
+                android:text="@string/acceder" />
+
+            <Button
+                android:id="@+id/registrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:text="@string/registrar"
+                android:onClick="registrarse"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</layout>
