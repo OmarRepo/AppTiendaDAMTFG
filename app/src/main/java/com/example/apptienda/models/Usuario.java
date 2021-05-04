@@ -3,6 +3,7 @@ package com.example.apptienda.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import android.util.Patterns;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -20,9 +21,11 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
-public class Usuario implements Parcelable {
+public class Usuario implements Parcelable{
     private String nombre;
     private String apellidos;
     private String correo;
@@ -31,12 +34,10 @@ public class Usuario implements Parcelable {
     private String telefono;
     private String calle;
     private String ciudad;
-
     /**
      * Contructor completo que se usa al recoger los datos de la base de datos directamente
      * @param nombre
      * @param apellidos
-     * @param correo
      * @param fechaNacimiento
      * @param email
      * @param telefono
@@ -44,10 +45,9 @@ public class Usuario implements Parcelable {
      * @param ciudad
      */
 
-    public Usuario(String nombre, String apellidos, String correo, String fechaNacimiento, String email, String telefono, String calle, String ciudad) {
+    public Usuario(String nombre, String apellidos, String fechaNacimiento, String email, String telefono, String calle, String ciudad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.telefono = telefono;
@@ -64,6 +64,7 @@ public class Usuario implements Parcelable {
         readFromParceable(in);
     }
 
+
     public String getNombre() {
         return nombre;
     }
@@ -78,14 +79,6 @@ public class Usuario implements Parcelable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getFechaNacimiento() {
@@ -128,6 +121,31 @@ public class Usuario implements Parcelable {
         this.ciudad = ciudad;
     }
 
+    public static boolean validateNombre(String nombre) {
+        return nombre.length()<=50 && nombre.length()>0;
+    }
+    public static boolean validateApellidos(String apellidos) {
+        return apellidos.length()<=40 && apellidos.length()>0;
+    }
+    public static boolean validateFechaNacimiento(String fechaNacimiento) {
+        return fechaNacimiento.length()>0;
+    }
+    public static  boolean validateTelefono(String telefono) {
+        return Patterns.PHONE.matcher(telefono).matches();
+    }
+    public static boolean validateCalle(String calle) {
+        return calle.length()<=55&& calle.length()>0;
+    }
+    public static boolean validateCiudad(String ciudad) {
+        return ciudad.length()<=50&& ciudad.length()>0;
+    }
+    public static boolean validatePassword(String password) {
+        return password.length()<17&&password.length()>7;
+    }
+    public static boolean validateEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -135,7 +153,6 @@ public class Usuario implements Parcelable {
         Usuario usuario = (Usuario) o;
         return Objects.equals(nombre, usuario.nombre) &&
                 Objects.equals(apellidos, usuario.apellidos) &&
-                Objects.equals(correo, usuario.correo) &&
                 Objects.equals(fechaNacimiento, usuario.fechaNacimiento) &&
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(telefono, usuario.telefono) &&
@@ -145,7 +162,7 @@ public class Usuario implements Parcelable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, apellidos, correo, fechaNacimiento, email, telefono, calle, ciudad);
+        return Objects.hash(nombre, apellidos, fechaNacimiento, email, telefono, calle, ciudad);
     }
 
     @Override
@@ -153,7 +170,6 @@ public class Usuario implements Parcelable {
         return "Usuario{" +
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                ", correo='" + correo + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono='" + telefono + '\'' +
@@ -166,7 +182,7 @@ public class Usuario implements Parcelable {
         try {
             String usuarioJson = gson.toJson(usuario,Usuario.class);
             String hash=getPassHass(password);
-            String url="";
+            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             JSONObject usuarioObject = new JSONObject(usuarioJson);
             usuarioObject.put("hash_pash",hash);
             usuarioObject.put("action","register");
@@ -186,29 +202,11 @@ public class Usuario implements Parcelable {
                             Log.i(getClass().getSimpleName(),error.toString());
                         }
                     });
+            queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    /*public static boolean RegistrarUsuario(Usuario usuario,String password) {
-        AtomicBoolean result= new AtomicBoolean(false);
-        Gson gson= new Gson();
-        try {
-            String usuarioJson = gson.toJson(usuario,Usuario.class);
-            String hash=getPassHass(password);
-            String url="";
-            JSONObject usuarioObject = new JSONObject(usuarioJson);
-            usuarioObject.put("hash",hash);
-            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST,url,usuarioObject,
-                    response -> result.set(true)
-                    ,
-                    error -> result.set(false));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return result.get();
-    }*/
     public static void LogIn(String email,String password, final VolleyCallback callback){
         try {
             JSONObject logData = new JSONObject();
@@ -244,8 +242,9 @@ public class Usuario implements Parcelable {
         try {
             String usuarioJson = gson.toJson(usuario,Usuario.class);
             JSONObject logData = new JSONObject(usuarioJson);
-            logData.put("action","register");
-            String url="";
+            logData.put("action","modficar");
+            Log.i("POSTDATA",logData.toString());
+            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
                     new Response.Listener<JSONObject>() {
@@ -262,35 +261,31 @@ public class Usuario implements Parcelable {
                             Log.i(getClass().getSimpleName(),error.toString());
                         }
                     });
+            queue.add(request);
         }catch (JSONException e) {
             Log.e("Json parseado error","Error:",e);
         }
     }
 
     public static String getPassHass(String input) {
+        String hash=null;
         try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
 
                 byte[] messageDigest = md.digest(input.getBytes());
 
                 BigInteger no = new BigInteger(1, messageDigest);
-
-                StringBuilder hash = new StringBuilder(no.toString(16));
-                while (hash.length() < 32) {
-                    hash.insert(0, "0");
-                }
-                return hash.toString();
                 //Deberiamos de evitar concatenar en bucles por temas de rendimiento
-                //return hash.toString();
-                //String hash = no.toString(16);
-                //while (hash.length() < 32) {
-                //    hash ="0"+hash;
-                //}
-                //return hash;
-            }
-        catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
+                StringBuilder hashCto = new StringBuilder(no.toString(16));
+                while (hashCto.length() < 32) {
+                    hashCto.insert(0, "0");
+                }
+                hash = hashCto.toString();
         }
+        catch (NoSuchAlgorithmException e) {
+            Log.e("calculatemd5",e.getMessage());
+        }
+        return hash;
     }
 
     @Override
@@ -302,7 +297,6 @@ public class Usuario implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nombre);
         dest.writeString(apellidos);
-        dest.writeString(correo);
         dest.writeString(fechaNacimiento);
         dest.writeString(email);
         dest.writeString(telefono);
@@ -312,7 +306,6 @@ public class Usuario implements Parcelable {
     private void readFromParceable(Parcel in) {
         this.nombre=in.readString();
         this.apellidos=in.readString();
-        this.correo=in.readString();
         this.fechaNacimiento=in.readString();
         this.email=in.readString();
         this.telefono=in.readString();

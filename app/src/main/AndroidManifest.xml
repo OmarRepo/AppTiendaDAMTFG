@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -12,7 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTienda">
-        <activity android:name=".Registro2"></activity>
+        <activity android:name=".RegisterFormActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.AppTienda.NoActionBar" />
+        <activity android:name=".Registro2" />
         <activity android:name=".Registro3" />
         <activity
             android:name=".Registro"

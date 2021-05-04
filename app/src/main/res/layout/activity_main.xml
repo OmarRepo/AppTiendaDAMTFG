@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.viewModels.LoginViewModel" />
+            type="com.example.apptienda.viewmodels.LoginViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/azul_letra"
             android:hint="@string/correo"
-            android:text="@={viewModel.Email}"
+            android:text="@={viewModel.email}"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@color/black" />
@@ -38,7 +38,7 @@
                 android:hint="@string/contraseña"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:text="@={viewModel.Password}"
+                android:text="@={viewModel.password}"
                 android:textColor="@color/azul_letra" />
         </com.google.android.material.textfield.TextInputLayout>
 

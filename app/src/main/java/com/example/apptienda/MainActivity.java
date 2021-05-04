@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.viewModels.LoginViewModel;
+import com.example.apptienda.viewmodels.LoginViewModel;
 import com.example.apptienda.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        vm=new ViewModelProvider(getViewModelStore(),ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(LoginViewModel.class);
+        vm=new ViewModelProvider(this).get(LoginViewModel.class);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(vm);
         binding.executePendingBindings();
@@ -28,15 +29,16 @@ public class MainActivity extends AppCompatActivity {
         Usuario usuarioLogeado=vm.login();
         if(usuarioLogeado!=null){
             Toast.makeText(this, usuarioLogeado.toString(), Toast.LENGTH_SHORT).show();
-            //Intent it=new Intent(this,Registro.class);
-            //it.putExtra("usuario",usuarioLogeado);
+            DataRepository.setUsuarioLogeado(usuarioLogeado);
+            Intent it=new Intent(this,HomeActivity.class);
+            startActivity(it);
         }
         else{
             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
         }
     }
     public void registrarse(View V){
-        Intent it=new Intent(this,Registro.class);
+        Intent it=new Intent(this,RegisterFormActivity.class);
         startActivity(it);
     }
 }
