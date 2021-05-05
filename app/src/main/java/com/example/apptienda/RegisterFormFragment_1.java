@@ -54,7 +54,7 @@ public class RegisterFormFragment_1 extends Fragment {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                final String selectedDate = year + "-" + (month+1) + "-" + day;
                 et.setText(selectedDate);
             }
         });

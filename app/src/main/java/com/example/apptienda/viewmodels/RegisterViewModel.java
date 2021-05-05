@@ -1,9 +1,14 @@
 package com.example.apptienda.viewmodels;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.VolleyError;
+import com.example.apptienda.App;
 import com.example.apptienda.models.Usuario;
 import com.example.apptienda.models.VolleyCallback;
 
@@ -90,12 +95,17 @@ public class RegisterViewModel extends ViewModel {
         Usuario.RegistrarUsuario(registroUsuario.getValue(),password.get(), new VolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
-
+                Log.i("registro",result);
             }
 
             @Override
             public void onSuccessResponse(JSONObject result) {
+                Log.i("registro",result.toString());
+            }
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -184,8 +184,9 @@ public class Usuario implements Parcelable{
             String hash=getPassHass(password);
             String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             JSONObject usuarioObject = new JSONObject(usuarioJson);
-            usuarioObject.put("hash_pash",hash);
+            usuarioObject.put("hash_pass",hash);
             usuarioObject.put("action","register");
+            Log.i("todo listo registro:",usuarioObject.toString());
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
                     new Response.Listener<JSONObject>() {
@@ -199,7 +200,7 @@ public class Usuario implements Parcelable{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i(getClass().getSimpleName(),error.toString());
+                            callback.onErrorResponse(error);
                         }
                     });
             queue.add(request);
@@ -228,7 +229,7 @@ public class Usuario implements Parcelable{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i(getClass().getSimpleName(),error.toString()+"aquixd");
+                            callback.onErrorResponse(error);
                         }
                     });
             Log.i("POSTTEST2",request.toString());
@@ -258,9 +259,10 @@ public class Usuario implements Parcelable{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i(getClass().getSimpleName(),error.toString());
+                            callback.onErrorResponse(error);
                         }
-                    });
+                    }
+                    );
             queue.add(request);
         }catch (JSONException e) {
             Log.e("Json parseado error","Error:",e);

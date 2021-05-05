@@ -26,16 +26,7 @@ public class MainActivity extends AppCompatActivity {
         binding.executePendingBindings();
     }
     public void login(View V){
-        Usuario usuarioLogeado=vm.login();
-        if(usuarioLogeado!=null){
-            Toast.makeText(this, usuarioLogeado.toString(), Toast.LENGTH_SHORT).show();
-            DataRepository.setUsuarioLogeado(usuarioLogeado);
-            Intent it=new Intent(this,HomeActivity.class);
-            startActivity(it);
-        }
-        else{
-            Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-        }
+        vm.login();
     }
     public void registrarse(View V){
         Intent it=new Intent(this,RegisterFormActivity.class);

@@ -59,6 +59,7 @@ public class RegisterFormActivity extends AppCompatActivity {
             if(error.length()==0) {
                 vm.rellenarUsuario();
                 Toast.makeText(this, vm.registroUsuario.getValue().toString(), Toast.LENGTH_SHORT).show();
+                vm.intentarRegistro();
             }
             else{
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
