@@ -7,6 +7,7 @@
     <string name="contraseña">Contraseña</string>
     <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
+    <string name="apellidos">Apellidos</string>
     <string name="fecha_n">Fecha de Nacimiento</string>
     <string name="tlf">Teléfono</string>
     <string name="direccion">Dirección</string>
@@ -17,6 +18,10 @@
     <string name="toast_tamano_tlf">Introduzca un número de teléfono válido(9 números)</string>
     <string name="toast_tamano_postal">Introduzca un código postal  válido(5 números)</string>
     <string name="toast_formato_correo">Introduzca un formato de correo válido(@dominio.extension)</string>
+    <string name="info_usuario">Información del Usuario</string>
+    <string name="volver_a_Tienda">Volver a Tienda</string>
+
+
 
     <!--
     This string is used for square devices and overridden by hello_world in
@@ -45,5 +50,5 @@
     <string name="menu_slideshow">Slideshow</string>
 
 
-    Nombre
+
 </resources>

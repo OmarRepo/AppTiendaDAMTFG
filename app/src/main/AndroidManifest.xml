@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTienda">
-        <activity android:name=".RegisterFormActivity"></activity>
+        <activity android:name=".perfil_usuario"></activity>
+        <activity android:name=".RegisterFormActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
