@@ -32,4 +32,10 @@ public class MainActivity extends AppCompatActivity {
         Intent it=new Intent(this,RegisterFormActivity.class);
         startActivity(it);
     }
+    //Solo es para probar como se ve la pagina, luego lo borro
+    public void ir_pagUsuario(View V){
+        Intent it = new Intent(this, perfil_usuario.class);
+        startActivity(it);
+
+    }
 }
