@@ -78,6 +78,8 @@
         android:ems="10"
         android:enabled="false"
         android:text="Nombre Persona"
+        android:maxLines="1"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -90,6 +92,8 @@
         android:ems="10"
         android:enabled="false"
         android:text="Apellido"
+        android:maxLines="1"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -101,6 +105,7 @@
         android:layout_marginBottom="448dp"
         android:ems="11"
         android:enabled="false"
+        android:maxLines="1"
         android:text="gigantes y cabezudos 2 3c"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -114,20 +119,21 @@
         android:ems="10"
         android:enabled="false"
         android:text="05/11/2000"
+        android:clickable="true"
+        android:onClick="calendario"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/volvertienda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="76dp"
         android:text="@string/volver_a_Tienda"
+        android:onClick="volverTienda"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -161,7 +167,9 @@
         android:ems="10"
         android:enabled="false"
         android:maxLength="9"
+        android:inputType="number"
         android:text="984561728"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -174,6 +182,7 @@
         android:ems="10"
         android:enabled="false"
         android:text="invented@gmail.net"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -198,6 +207,7 @@
         android:inputType="textPassword"
         android:enabled="false"
         android:text="password"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -223,6 +233,29 @@
         android:enabled="false"
         android:maxLength="5"
         android:text="24856"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="154dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="76dp"
+        android:text="@string/cambiar_Datos"
+        android:onClick="cambiarEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="166dp"
+        android:layout_marginBottom="16dp"
+        android:text="Send"
+        android:onClick="enviarDatosNuevos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

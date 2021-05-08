@@ -20,6 +20,10 @@
     <string name="toast_formato_correo">Introduzca un formato de correo válido(@dominio.extension)</string>
     <string name="info_usuario">Información del Usuario</string>
     <string name="volver_a_Tienda">Volver a Tienda</string>
+    <string name="cambiar_Datos">Cambiar Datos</string>
+    <string name="modificaDatosAntes">Error, no has modificado nigun dato, persiona el boton Cambiar Datos y modifica los datos que quieras</string>
+
+
 
 
 
