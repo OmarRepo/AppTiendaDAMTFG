@@ -193,7 +193,7 @@ public class Usuario implements Parcelable{
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i(getClass().getSimpleName(),response.toString());
-                            callback.onSuccessResponse(response.toString());
+                            callback.onSuccessResponse(response);
                         }
                     }
                     ,
@@ -222,7 +222,7 @@ public class Usuario implements Parcelable{
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i(getClass().getSimpleName(),response.toString());
-                            callback.onSuccessResponse(response.toString());
+                            callback.onSuccessResponse(response);
                         }
                     }
                     ,
@@ -252,7 +252,7 @@ public class Usuario implements Parcelable{
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i(getClass().getSimpleName(),response.toString());
-                            callback.onSuccessResponse(response.toString());
+                            callback.onSuccessResponse(response);
                         }
                     }
                     ,

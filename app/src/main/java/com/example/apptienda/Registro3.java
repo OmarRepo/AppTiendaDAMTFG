@@ -33,7 +33,6 @@ public class Registro3 extends AppCompatActivity {
         postal=getIntent().getStringExtra("postal");
         correo=findViewById(R.id.correo);
         pass=findViewById(R.id.pass_registro);
-
     }
     public  boolean validarEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;

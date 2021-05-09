@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void login(View V){
         vm.login();
+        //Intent it=new Intent(this,HomeActivity.class);
+        //startActivity(it);
     }
     public void registrarse(View V){
         Intent it=new Intent(this,RegisterFormActivity.class);

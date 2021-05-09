@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.volley.VolleyError;
 import com.example.apptienda.App;
+import com.example.apptienda.HomeActivity;
 import com.example.apptienda.RegisterFormActivity;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
@@ -50,7 +51,7 @@ public class LoginViewModel extends ViewModel {
         return Usuario.validatePassword(password.get()) && Usuario.validateEmail(email.get());
     }
     private void navigateToHome() {
-        Intent it=new Intent(App.getContext(), RegisterFormActivity.class);
+        Intent it=new Intent(App.getContext(), HomeActivity.class);
         App.getApplication().startActivity(it);
     }
 }
