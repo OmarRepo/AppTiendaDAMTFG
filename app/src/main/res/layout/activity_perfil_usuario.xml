@@ -252,10 +252,10 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="166dp"
+        android:layout_marginEnd="128dp"
         android:layout_marginBottom="16dp"
-        android:text="Send"
         android:onClick="enviarDatosNuevos"
+        android:text="@string/guardarCambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

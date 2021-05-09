@@ -21,10 +21,16 @@
     <string name="info_usuario">Información del Usuario</string>
     <string name="volver_a_Tienda">Volver a Tienda</string>
     <string name="cambiar_Datos">Cambiar Datos</string>
+    <string name="guardarCambios">Guardar Cambios</string>
+    <string name="sobreNosotros">Sobre Nosotros</string>
     <string name="modificaDatosAntes">Error, no has modificado nigun dato, persiona el boton Cambiar Datos y modifica los datos que quieras</string>
-
-
-
+    <string name="cuerpoSobreNosotros">Buy A Skill nació como una forma de facilitar a las personas el comienzo en una nueva disciplina o habilidad.
+        <br/><br/>
+    Para ello ponemos a disposición de nuestros clientes paquete con las herramientas y guías de la habilidad que desea de manera que él comienza sea mucho más sencillo.
+        <br/><br/>
+        La idea de Buy A Skill es hacer que cualquier persona puede obtener la habilidad que quiera sin la idea de tener que romperse la cabeza, sino que lo pueda hacer con tranquilidad
+        y seguridad en su hogar con la confianza de que el producto adquirido cumplirá sus expectativas
+    </string>
 
 
     <!--
@@ -52,7 +58,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-
 
 
 </resources>
