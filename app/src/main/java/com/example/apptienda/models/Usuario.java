@@ -216,12 +216,10 @@ public class Usuario implements Parcelable{
             logData.put("action","login");
             String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            Log.i("POSTTEST",logData.toString());
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i(getClass().getSimpleName(),response.toString());
                             callback.onSuccessResponse(response);
                         }
                     }
@@ -232,10 +230,9 @@ public class Usuario implements Parcelable{
                             callback.onErrorResponse(error);
                         }
                     });
-            Log.i("POSTTEST2",request.toString());
             queue.add(request);
         }catch (JSONException e) {
-            Log.e("Json parseado error","Error:",e);
+           e.printStackTrace();
         }
     }
     public static void ModificarUsuario(Usuario usuario,final VolleyCallback callback) {
@@ -251,7 +248,6 @@ public class Usuario implements Parcelable{
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i(getClass().getSimpleName(),response.toString());
                             callback.onSuccessResponse(response);
                         }
                     }
@@ -265,7 +261,7 @@ public class Usuario implements Parcelable{
                     );
             queue.add(request);
         }catch (JSONException e) {
-            Log.e("Json parseado error","Error:",e);
+            e.printStackTrace();
         }
     }
 
@@ -285,7 +281,7 @@ public class Usuario implements Parcelable{
                 hash = hashCto.toString();
         }
         catch (NoSuchAlgorithmException e) {
-            Log.e("calculatemd5",e.getMessage());
+            e.printStackTrace();
         }
         return hash;
     }
