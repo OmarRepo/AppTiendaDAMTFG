@@ -45,6 +45,14 @@ public class perfil_usuario extends AppCompatActivity {
         correo=findViewById(R.id.correo_perfilusu);
         pass=findViewById(R.id.pass_perfilusu);
         usu= DataRepository.getUsuarioLogeado();
+        nombre.setText(usu.getNombre());
+        apellido.setText(usu.getApellidos());
+        dir.setText(usu.getCalle()+" "+usu.getCiudad());
+        //cod.setText(usu.ge);
+        fecha.setText(usu.getFechaNacimiento());
+        tlf.setText(usu.getTelefono());
+        correo.setText(usu.getEmail());
+        //pass.setText(usu.ge);
         clickado=0;
     }
     public void cambiarEdit(View view){
