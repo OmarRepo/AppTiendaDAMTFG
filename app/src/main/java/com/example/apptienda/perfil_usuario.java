@@ -11,10 +11,25 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.apptienda.helpers.SingletonRequestQueue;
+import com.example.apptienda.models.DataRepository;
+import com.example.apptienda.models.Usuario;
+import com.example.apptienda.models.VolleyCallback;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.regex.Pattern;
 
 public class perfil_usuario extends AppCompatActivity {
     EditText nombre,apellido,dir,cod,fecha,tlf,correo,pass;
+    Usuario usu;
     int clickado;
 
     @Override
@@ -29,6 +44,7 @@ public class perfil_usuario extends AppCompatActivity {
         tlf=findViewById(R.id.numtlf_perfilusu);
         correo=findViewById(R.id.correo_perfilusu);
         pass=findViewById(R.id.pass_perfilusu);
+        usu= DataRepository.getUsuarioLogeado();
         clickado=0;
     }
     public void cambiarEdit(View view){
@@ -60,18 +76,14 @@ public class perfil_usuario extends AppCompatActivity {
                             correo.setEnabled(false);
                             pass.setEnabled(false);
                             clickado=0;
-
                         }
                         else {
                             Toast.makeText(this, R.string.toast_formato_correo, Toast.LENGTH_SHORT).show();
                         }
-
-
                     }
                     else {
                         Toast.makeText(this, R.string.toast_tamano_tlf, Toast.LENGTH_SHORT).show();
                     }
-
                 }
                 else{
                     Toast.makeText(this, R.string.toast_tamano_postal, Toast.LENGTH_SHORT).show();
@@ -79,7 +91,6 @@ public class perfil_usuario extends AppCompatActivity {
             }
             else {
                 Toast.makeText(this, R.string.toast_rellenar_campos, Toast.LENGTH_SHORT).show();
-
             }
         }else
             Toast.makeText(this, R.string.modificaDatosAntes, Toast.LENGTH_SHORT).show();

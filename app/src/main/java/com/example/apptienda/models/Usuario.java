@@ -248,6 +248,8 @@ public class Usuario implements Parcelable{
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Gson gson=new Gson();
+                            DataRepository.setUsuarioLogeado(gson.fromJson(response.toString(),Usuario.class));
                             callback.onSuccessResponse(response);
                         }
                     }
