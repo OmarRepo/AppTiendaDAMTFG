@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -58,8 +59,9 @@ public class RegisterFormActivity extends AppCompatActivity {
             error= form3.validateFields();
             if(error.length()==0) {
                 vm.rellenarUsuario();
-                Toast.makeText(this, vm.registroUsuario.getValue().toString(), Toast.LENGTH_SHORT).show();
                 vm.intentarRegistro();
+                Intent it=new Intent(App.getContext(), MainActivity.class);
+                App.getContext().startActivity(it);
             }
             else{
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
