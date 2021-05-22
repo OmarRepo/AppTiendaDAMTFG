@@ -17,6 +17,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.App;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,13 +28,32 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Usuario implements Parcelable{
+    @SerializedName("Id")
+    @Expose
+    private String Id;
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
+    @SerializedName("apellidos")
+    @Expose
     private String apellidos;
+    @SerializedName("correo")
+    @Expose
     private String correo;
+    @SerializedName("fechaNacimiento")
+    @Expose
     private String fechaNacimiento;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("telefono")
+    @Expose
     private String telefono;
+    @SerializedName("calle")
+    @Expose
     private String calle;
+    @SerializedName("ciudad")
+    @Expose
     private String ciudad;
     /**
      * Contructor completo que se usa al recoger los datos de la base de datos directamente
@@ -45,7 +66,7 @@ public class Usuario implements Parcelable{
      * @param ciudad
      */
 
-    public Usuario(String nombre, String apellidos, String fechaNacimiento, String email, String telefono, String calle, String ciudad) {
+    public Usuario(String nombre, String apellidos, String fechaNacimiento, String email, String telefono, String calle, String ciudad,String Id) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
@@ -53,17 +74,20 @@ public class Usuario implements Parcelable{
         this.telefono = telefono;
         this.calle = calle;
         this.ciudad = ciudad;
+        this.Id = Id;
     }
 
     /**
      * Constructor sin parametros para usar durante el registro
      */
     public Usuario() {
+
     }
     public Usuario(Parcel in) {
         readFromParceable(in);
     }
 
+    public String getId() {return Id;}
 
     public String getNombre() {
         return nombre;
@@ -121,6 +145,9 @@ public class Usuario implements Parcelable{
         this.ciudad = ciudad;
     }
 
+    /*
+    * A partir de aqui hay metodos para validar datos
+    */
     public static boolean validateNombre(String nombre) {
         return nombre.length()<=50 && nombre.length()>0;
     }
@@ -157,18 +184,20 @@ public class Usuario implements Parcelable{
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(telefono, usuario.telefono) &&
                 Objects.equals(calle, usuario.calle) &&
-                Objects.equals(ciudad, usuario.ciudad);
+                Objects.equals(ciudad, usuario.ciudad) &&
+                Objects.equals(Id,usuario.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, apellidos, fechaNacimiento, email, telefono, calle, ciudad);
+        return Objects.hash(nombre, apellidos, fechaNacimiento, email, telefono, calle, ciudad,Id);
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "nombre='" + nombre + '\'' +
+                "id='" + Id + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", email='" + email + '\'' +
@@ -295,6 +324,7 @@ public class Usuario implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Id);
         dest.writeString(nombre);
         dest.writeString(apellidos);
         dest.writeString(fechaNacimiento);
@@ -302,8 +332,10 @@ public class Usuario implements Parcelable{
         dest.writeString(telefono);
         dest.writeString(calle);
         dest.writeString(ciudad);
+
     }
     private void readFromParceable(Parcel in) {
+        this.Id=in.readString();
         this.nombre=in.readString();
         this.apellidos=in.readString();
         this.fechaNacimiento=in.readString();
