@@ -1,4 +1,4 @@
-package com.example.apptienda.ui.gallery;
+package com.example.apptienda.ui.Perfil;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -28,16 +28,16 @@ import org.json.JSONException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-public class GalleryFragment extends Fragment {
+public class PerfilFragment extends Fragment {
     EditText nombre,apellido,dir,cod,fecha,tlf,correo,pass,ciudad;
     Button editarEdits;
     Usuario usu;
     int clickado;
-    private GalleryViewModel galleryViewModel;
+    private PerfilViewModel perfilViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         /*final TextView textView = root.findViewById(R.id.text_gallery);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
