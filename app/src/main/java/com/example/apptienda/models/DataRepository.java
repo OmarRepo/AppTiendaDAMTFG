@@ -14,4 +14,7 @@ public class DataRepository {
     public static void setUsuarioLogeado(Usuario usuarioLogeado) {
         DataRepository.usuarioLogeado.setValue(usuarioLogeado);
     }
+    public static void postUsuarioLogeado(Usuario usuarioLogeado) {
+        DataRepository.usuarioLogeado.postValue(usuarioLogeado);
+    }
 }

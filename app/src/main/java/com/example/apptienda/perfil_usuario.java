@@ -19,7 +19,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.models.VolleyCallback;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -129,5 +128,9 @@ public class perfil_usuario extends AppCompatActivity {
 
         newFragment.show(this.getSupportFragmentManager(), "datePicker");
 
+    }
+    public void showToast(final String toast)
+    {
+        runOnUiThread(() -> Toast.makeText(this, toast, Toast.LENGTH_SHORT).show());
     }
 }

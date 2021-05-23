@@ -2,6 +2,7 @@ package com.example.apptienda;
 
 import android.app.Application;
 import android.content.Context;
+import android.widget.Toast;
 
 public class App extends Application {
     private static Application app;

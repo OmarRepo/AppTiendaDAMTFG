@@ -31,13 +31,12 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(it);
     }
     public void registrarse(View V){
-        Intent it=new Intent(this,RegisterFormActivity.class);
+        Intent it = new Intent(this, RegisterFormActivity.class);
         startActivity(it);
     }
     //Solo es para probar como se ve la pagina, luego lo borro
     public void ir_pagUsuario(View V){
         Intent it = new Intent(this, perfil_usuario.class);
         startActivity(it);
-
     }
 }

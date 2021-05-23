@@ -14,17 +14,21 @@
         tools:context=".MainActivity"
         android:gravity="center"
         android:layout_margin="16dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/azul_letra"
             android:hint="@string/correo"
             android:text="@={viewModel.email}"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:textColor="@color/black" />
+            android:textColor="@color/azul_letra" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
+                android:enabled="@{viewModel.actionsEnabled}"
                 android:onClick="login"
                 android:text="@string/acceder" />
 
@@ -65,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
+                android:enabled="@{viewModel.actionsEnabled}"
                 android:text="@string/registrar"
                 android:onClick="registrarse"/>
         </LinearLayout>
@@ -74,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ir_Perfil"
+            android:enabled="@{viewModel.actionsEnabled}"
             android:onClick="ir_pagUsuario"/>
 
     </LinearLayout>

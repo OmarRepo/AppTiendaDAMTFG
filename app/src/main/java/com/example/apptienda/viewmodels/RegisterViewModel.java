@@ -9,7 +9,10 @@ import androidx.lifecycle.ViewModel;
 import com.example.apptienda.App;
 import com.example.apptienda.models.Usuario;
 
+import org.json.JSONException;
+
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class RegisterViewModel extends ViewModel {
     public MutableLiveData<Usuario> registroUsuario;
@@ -88,16 +91,16 @@ public class RegisterViewModel extends ViewModel {
         usuarioNuevo.setFechaNacimiento(fecha_nacimiento.get());
         registroUsuario.setValue(usuarioNuevo);
     }
-    public void intentarRegistro() {
-        try {
-            Usuario usu = registroUsuario.getValue().RegistrarUsuario(password.get());
-            Toast.makeText(App.getContext(), "Registro de usuario: "+usu.getNombre()+"\nCompletado satisfactoriamente", Toast.LENGTH_SHORT).show();
-        } catch (ExecutionException e) {
-            Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
-        } catch (InterruptedException e) {
-            Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
-        }
-
+    public synchronized void intentarRegistro() {
+        Thread thread = new Thread(() -> {
+            try {
+                Usuario usu = registroUsuario.getValue().RegistrarUsuario(password.get());
+                Toast.makeText(App.getContext(), "Registro de usuario: "+usu.getNombre()+"\nCompletado satisfactoriamente", Toast.LENGTH_SHORT).show();
+            } catch (ExecutionException | InterruptedException | TimeoutException | JSONException e) {
+                Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
+            }
+        });
+        thread.start();
     }
 
 }

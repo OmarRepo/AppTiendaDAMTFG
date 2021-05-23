@@ -22,6 +22,7 @@ import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class GalleryFragment extends Fragment {
     EditText nombre,apellido,dir,cod,fecha,tlf,correo,pass,ciudad;
@@ -93,14 +94,7 @@ public class GalleryFragment extends Fragment {
                     usu.setFechaNacimiento(fecha.getText().toString());
                     usu.setTelefono(tlf.getText().toString());
                     usu.setEmail(correo.getText().toString());
-                    try {
-                        usu=usu.ModificarUsuario();
                         Toast.makeText(App.getContext(), R.string.exitoCambios, Toast.LENGTH_SHORT).show();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });

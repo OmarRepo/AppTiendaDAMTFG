@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class Usuario implements Parcelable{
     @SerializedName("Id")
@@ -203,68 +205,56 @@ public class Usuario implements Parcelable{
                 ", ciudad='" + ciudad + '\'' +
                 '}';
     }
-    public Usuario RegistrarUsuario(String password) throws ExecutionException, InterruptedException {
+    public Usuario RegistrarUsuario(String password) throws ExecutionException, InterruptedException, TimeoutException, JSONException {
         Gson gson= new Gson();
         CompletableFuture<Usuario> future = new CompletableFuture<>();
-        try {
-            String usuarioJson = gson.toJson(this,Usuario.class);
-            String hash=getPassHass(password);
-            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
-            JSONObject usuarioObject = new JSONObject(usuarioJson);
-            usuarioObject.put("hash_pass",hash);
-            usuarioObject.put("action","register");
-            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
-                    response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
-                    ,
-                    error -> future.completeExceptionally(error));
-            queue.add(request);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return future.get();
+        String usuarioJson = gson.toJson(this,Usuario.class);
+        String hash=getPassHass(password);
+        String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
+        JSONObject usuarioObject = new JSONObject(usuarioJson);
+        usuarioObject.put("hash_pass",hash);
+        usuarioObject.put("action","register");
+        RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
+                response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
+                ,
+                error -> future.completeExceptionally(error));
+        queue.add(request);
+        return future.get(10, TimeUnit.SECONDS);
     }
-    public static Usuario LogIn(String email, String password) throws ExecutionException, InterruptedException {
+    public static Usuario LogIn(String email, String password) throws ExecutionException, InterruptedException, TimeoutException, JSONException {
         Gson gson= new Gson();
         CompletableFuture<Usuario> future = new CompletableFuture<>();
-        try {
-            JSONObject logData = new JSONObject();
-            logData.put("email",email);
-            logData.put("hash_pass",getPassHass(password));
-            logData.put("action","login");
-            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
-            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
-                    response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
-                    ,
-                    error -> future.completeExceptionally(error));
-            queue.add(request);
-        }catch (JSONException e) {
-           e.printStackTrace();
-        }
-        return future.get();
+        JSONObject logData = new JSONObject();
+        logData.put("email",email);
+        logData.put("hash_pass",getPassHass(password));
+        logData.put("action","login");
+        String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
+        RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
+                response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
+                ,
+                error -> future.completeExceptionally(error));
+        queue.add(request);
+        return future.get(10,TimeUnit.SECONDS);
     }
-    public Usuario ModificarUsuario() throws ExecutionException, InterruptedException {
+    public Usuario ModificarUsuario() throws ExecutionException, InterruptedException, TimeoutException, JSONException {
         Gson gson= new Gson();
         CompletableFuture<Usuario> future = new CompletableFuture<>();
-        try {
-            String usuarioJson = gson.toJson(this,Usuario.class);
-            JSONObject logData = new JSONObject(usuarioJson);
-            logData.put("action","modficar");
-            String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
-            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
-                    response -> {
-                        future.complete(gson.fromJson(response.toString(),Usuario.class));
-                    }
-                    ,
-                    error -> future.completeExceptionally(error)
-            );
-            queue.add(request);
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return future.get();
+        String usuarioJson = gson.toJson(this,Usuario.class);
+        JSONObject logData = new JSONObject(usuarioJson);
+        logData.put("action","modficar");
+        String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
+        RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
+                response -> {
+                    future.complete(gson.fromJson(response.toString(),Usuario.class));
+                }
+                ,
+                error -> future.completeExceptionally(error)
+        );
+        queue.add(request);
+        return future.get(10,TimeUnit.SECONDS);
     }
 
     public static String getPassHass(String input) {

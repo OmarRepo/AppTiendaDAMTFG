@@ -4,10 +4,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.apptienda.models.Usuario;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +31,7 @@ public class ExampleInstrumentedTest {
         try {
             Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba123");
             assertNotNull(usu);
-        } catch (ExecutionException e) {
+        } catch (ExecutionException | TimeoutException | JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -40,7 +42,7 @@ public class ExampleInstrumentedTest {
         try {
             Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba120");
             assertNull(usu);
-        } catch (ExecutionException e) {
+        }catch (ExecutionException | TimeoutException | JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
