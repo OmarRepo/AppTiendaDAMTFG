@@ -1,4 +1,4 @@
-package com.example.apptienda;
+package com.example.apptienda.Basura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.apptienda.R;
 
 public class Registro2 extends AppCompatActivity {
     String nombre;
@@ -18,7 +20,6 @@ public class Registro2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro2);
         nombre=getIntent().getStringExtra ("nombre");
          apellido=getIntent().getStringExtra("apellido");
          tlf=getIntent().getStringExtra("tlf");

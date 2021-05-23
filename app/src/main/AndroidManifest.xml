@@ -20,10 +20,10 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.AppTienda.NoActionBar" />
-        <activity android:name=".Registro2" />
-        <activity android:name=".Registro3" />
+        <activity android:name=".Basura.Registro2" />
+        <activity android:name=".Basura.Registro3" />
         <activity
-            android:name=".Registro"
+            android:name=".Basura.Registro"
             android:label="@string/registro" />
         <activity android:name=".MainActivity">
             <intent-filter>

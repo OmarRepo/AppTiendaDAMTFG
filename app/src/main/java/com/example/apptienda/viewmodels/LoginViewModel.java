@@ -4,19 +4,12 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.android.volley.VolleyError;
 import com.example.apptienda.App;
 import com.example.apptienda.HomeActivity;
-import com.example.apptienda.RegisterFormActivity;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.models.VolleyCallback;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 

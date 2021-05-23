@@ -1,4 +1,4 @@
-package com.example.apptienda.models;
+package com.example.apptienda.Basura;
 
 
 import com.android.volley.VolleyError;

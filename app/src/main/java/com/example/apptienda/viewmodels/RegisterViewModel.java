@@ -1,20 +1,13 @@
 package com.example.apptienda.viewmodels;
 
-import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.android.volley.VolleyError;
 import com.example.apptienda.App;
-import com.example.apptienda.MainActivity;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.models.VolleyCallback;
-
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 

@@ -1,4 +1,4 @@
-package com.example.apptienda;
+package com.example.apptienda.Basura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.apptienda.MainActivity;
+import com.example.apptienda.R;
 
 import java.util.regex.Pattern;
 
@@ -23,7 +26,6 @@ public class Registro3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro3);
         nombre=getIntent().getStringExtra ("nombre");
         apellido=getIntent().getStringExtra("apellido");
         tlf=getIntent().getStringExtra("tlf");
@@ -41,7 +43,7 @@ public class Registro3 extends AppCompatActivity {
     public void fin_registro(View V){
         if(correo.getText().length()!=0 && pass.getText().length()!=0){
             if(validarEmail(correo.getText().toString())){
-                Intent it=new Intent(this,MainActivity.class);
+                Intent it=new Intent(this, MainActivity.class);
                /* it.putExtra("nombre",nombre);
                 it.putExtra("apellido",apellido);
                 it.putExtra("tlf",tlf);

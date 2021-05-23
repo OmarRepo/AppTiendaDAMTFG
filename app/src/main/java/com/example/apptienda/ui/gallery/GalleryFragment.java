@@ -1,7 +1,6 @@
 package com.example.apptienda.ui.gallery;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,24 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.volley.VolleyError;
 import com.example.apptienda.App;
 import com.example.apptienda.DatePickerFragment;
 import com.example.apptienda.R;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.models.VolleyCallback;
-
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 

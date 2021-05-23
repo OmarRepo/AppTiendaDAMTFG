@@ -1,4 +1,4 @@
-package com.example.apptienda;
+package com.example.apptienda.Basura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,12 +10,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apptienda.DatePickerFragment;
+import com.example.apptienda.R;
+
 public class Registro extends AppCompatActivity {
     EditText name,apellido,tlf,fecha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
         name=findViewById(R.id.nombre_registro);
         apellido=findViewById(R.id.apellidos_registro);
         tlf=findViewById(R.id.tlf);

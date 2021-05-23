@@ -1,19 +1,12 @@
 package com.example.apptienda;
 
-import android.content.Context;
-
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.volley.VolleyError;
 import com.example.apptienda.models.Usuario;
-import com.example.apptienda.models.VolleyCallback;
 
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.*;

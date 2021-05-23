@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Registro2"
+    tools:context=".Basura.Registro3"
     android:gravity="center">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:text="@string/direccion"
+        android:text="@string/correo"
         android:textColor="@color/azul_letra"
         android:textSize="20sp"
         android:paddingLeft="8dp"
@@ -21,13 +21,13 @@
         />
 
     <EditText
-        android:id="@+id/direccion"
+        android:id="@+id/correo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/azul_letra"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textWebEmailAddress"
         android:maxLength="50"
         android:maxLines="1"
         android:textSize="25sp"
@@ -40,45 +40,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:text="@string/ciudad"
-        android:textColor="@color/azul_letra"
-        android:textSize="20sp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"/>
-    <!-- La longitud es 45 por el gran pueblo de  gargantilla del lozoya y pinilla de buitrago(es solo 1, no 2)-->
-    <EditText
-        android:id="@+id/ciudad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/azul_letra"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:maxLength="50"
-        android:maxLines="1"
-        android:textSize="25sp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="@string/cod_postal"
+        android:text="@string/contraseña"
         android:textColor="@color/azul_letra"
         android:textSize="20sp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
 
     <EditText
-        android:id="@+id/cod_postal"
+        android:id="@+id/pass_registro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/azul_letra"
         android:ems="10"
-        android:inputType="number"
-        android:maxLength="5"
+        android:inputType="textWebPassword"
+        android:maxLength="32"
         android:maxLines="1"
         android:textSize="25sp"
         android:layout_marginLeft="16dp"
@@ -97,14 +73,13 @@
             android:layout_weight="3" />
 
         <ImageButton
-            android:id="@+id/siguiente1"
+            android:id="@+id/botonpagina2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="16dp"
-            android:onClick="ir_pag3"
+            android:onClick="fin_registro"
             app:srcCompat="@drawable/ic_arrow_forward_ios" />
-
     </LinearLayout>
 
 </LinearLayout>
