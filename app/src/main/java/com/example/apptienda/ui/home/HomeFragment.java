@@ -42,43 +42,11 @@ public class HomeFragment extends Fragment {
     }
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Thread hilo= new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ListaPaquetes= Paquete.obtenerPaquetes();
-                    RecyclerView rv=getView().findViewById(R.id.listaPaquetes);
-                    ArrayList<String> paquetes = new ArrayList<>();
-                    for(Paquete pack:ListaPaquetes){
-                        paquetes.add(pack.toString());
-                    }
-                    rv.setLayoutManager(new LinearLayoutManager(App.getContext()));
-                    adapter = new MyRecyclerViewAdapter(App.getContext(), paquetes);
-                    adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
 
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            Toast.makeText(App.getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    rv.setAdapter(adapter);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        hilo.start();
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        obtenerDatos();
-    }
+
 
     public void obtenerDatos(){
         Thread hilo= new Thread(new Runnable() {

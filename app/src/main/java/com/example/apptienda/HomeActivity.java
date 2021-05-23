@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.example.apptienda.models.Paquete;
+import com.example.apptienda.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -16,10 +18,18 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private List<Paquete> ListaPaquetes;
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,5 +76,45 @@ public class HomeActivity extends AppCompatActivity {
     public void showToast(final String toast)
     {
         runOnUiThread(() -> Toast.makeText(this, toast, Toast.LENGTH_SHORT).show());
+    }
+
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+
+    }*/
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        Thread hilo= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ListaPaquetes= Paquete.obtenerPaquetes();
+                     rv=findViewById(R.id.listaPaquetes);
+                    ArrayList<String> paquetes = new ArrayList<>();
+                    for(Paquete pack:ListaPaquetes){
+                        paquetes.add(pack.toString());
+                    }
+                    rv.setLayoutManager(new LinearLayoutManager(App.getContext()));
+                    MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(App.getContext(), paquetes);
+                    adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Toast.makeText(App.getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    rv.setAdapter(adapter);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        hilo.start();
+        
     }
 }
