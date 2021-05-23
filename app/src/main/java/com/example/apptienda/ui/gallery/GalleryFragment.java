@@ -2,6 +2,8 @@ package com.example.apptienda.ui.gallery;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import com.example.apptienda.DatePickerFragment;
 import com.example.apptienda.R;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
+
+import org.json.JSONException;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -94,7 +98,22 @@ public class GalleryFragment extends Fragment {
                     usu.setFechaNacimiento(fecha.getText().toString());
                     usu.setTelefono(tlf.getText().toString());
                     usu.setEmail(correo.getText().toString());
-                        Toast.makeText(App.getContext(), R.string.exitoCambios, Toast.LENGTH_SHORT).show();
+                    Thread thread = new Thread(() -> {
+                        try {
+                            usu=usu.ModificarUsuario();
+                            Handler handler = new Handler(Looper.getMainLooper());
+                            handler.post(() -> Toast.makeText(App.getApplication(), R.string.exitoCambios, Toast.LENGTH_LONG).show());
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (TimeoutException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    thread.start();
                 }
             }
         });

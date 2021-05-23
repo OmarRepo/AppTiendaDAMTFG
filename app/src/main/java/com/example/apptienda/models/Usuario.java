@@ -2,6 +2,7 @@ package com.example.apptienda.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.util.Patterns;
 
 import java.math.BigInteger;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class Usuario implements Parcelable{
-    @SerializedName("Id")
+    @SerializedName("id")
     @Expose
     private String Id;
     @SerializedName("nombre")
@@ -243,7 +244,8 @@ public class Usuario implements Parcelable{
         CompletableFuture<Usuario> future = new CompletableFuture<>();
         String usuarioJson = gson.toJson(this,Usuario.class);
         JSONObject logData = new JSONObject(usuarioJson);
-        logData.put("action","modficar");
+        logData.put("action","modify");
+        Log.wtf("1255",logData.toString());
         String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
         RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
