@@ -8,10 +8,9 @@ import com.android.volley.toolbox.Volley;
 public class SingletonRequestQueue {
     private static SingletonRequestQueue instance;
     private RequestQueue queue;
-    private String url;
 
     private SingletonRequestQueue(Context context) {
-        queue = Volley.newRequestQueue(context.getApplicationContext());
+        queue = Volley.newRequestQueue(context);
     }
     public static synchronized SingletonRequestQueue getInstance(Context context) {
         if(instance==null) {

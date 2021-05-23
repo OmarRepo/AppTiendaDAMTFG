@@ -17,13 +17,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.volley.VolleyError;
 import com.example.apptienda.App;
 import com.example.apptienda.DatePickerFragment;
 import com.example.apptienda.R;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -98,22 +102,22 @@ public class PerfilFragment extends Fragment {
                     usu.setFechaNacimiento(fecha.getText().toString());
                     usu.setTelefono(tlf.getText().toString());
                     usu.setEmail(correo.getText().toString());
-                    Thread thread = new Thread(() -> {
-                        try {
-                            usu=usu.ModificarUsuario();
-                            Handler handler = new Handler(Looper.getMainLooper());
-                            handler.post(() -> Toast.makeText(App.getApplication(), R.string.exitoCambios, Toast.LENGTH_LONG).show());
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (TimeoutException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    thread.start();
+                    try {
+                        usu.ModificarUsuario(new VolleyJSONCallback(){
+                            @Override
+                            public void onSuccessResponse(JSONObject result) {
+                                Gson gson = new Gson();
+                                usu=gson.fromJson(result.toString(),Usuario.class);
+                            }
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(App.getContext(), "Error al modificar usuario", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });

@@ -10,13 +10,17 @@ import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.VolleyError;
 import com.example.apptienda.App;
 import com.example.apptienda.HomeActivity;
 import com.example.apptienda.RegisterFormActivity;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Usuario;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -33,21 +37,23 @@ public class LoginViewModel extends ViewModel {
     }
     public void login() {
         if(validateFields()) {
-            actionsEnabled.set(false);
-            Thread task= new Thread(() -> {
-                try {
-                    Usuario usu = Usuario.LogIn(email.get(), password.get());
-                    DataRepository.postUsuarioLogeado(usu);
-                    navigateToHome();
-                } catch (ExecutionException | InterruptedException | TimeoutException | JSONException e) {
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        handler.post(() -> Toast.makeText(App.getApplication(), "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show());
-                } finally {
-                    actionsEnabled.set(true);
-                }
+            try {
+                Usuario.LogIn(email.get(), password.get(), new VolleyJSONCallback() {
+                    @Override
+                    public void onSuccessResponse(JSONObject result) {
+                        Gson gson=new Gson();
+                        Usuario usu = gson.fromJson(result.toString(),Usuario.class);
+                        DataRepository.postUsuarioLogeado(usu);
+                        navigateToHome();
+                    }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            );
-            task.start();
         }
     }
     private boolean validateFields() {
@@ -56,13 +62,13 @@ public class LoginViewModel extends ViewModel {
     private void navigateToHome() {
         actionsEnabled.set(false);
         Intent it=new Intent(App.getContext(), HomeActivity.class);
-        App.getApplication().startActivity(it);
+        App.getContext().startActivity(it);
         actionsEnabled.set(true);
     }
     private void navigateToRegister() {
         actionsEnabled.set(false);
         Intent it=new Intent(App.getContext(), RegisterFormActivity.class);
-        App.getApplication().startActivity(it);
+        App.getContext().startActivity(it);
         actionsEnabled.set(true);
     }
 }

@@ -87,34 +87,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        Thread hilo= new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ListaPaquetes= Paquete.obtenerPaquetes();
-                     rv=findViewById(R.id.listaPaquetes);
-                    ArrayList<String> paquetes = new ArrayList<>();
-                    for(Paquete pack:ListaPaquetes){
-                        paquetes.add(pack.toString());
-                    }
-                    rv.setLayoutManager(new LinearLayoutManager(App.getContext()));
-                    MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(App.getContext(), paquetes);
-                    adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            Toast.makeText(App.getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    rv.setAdapter(adapter);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        hilo.start();
         
     }
 }

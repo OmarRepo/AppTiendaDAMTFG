@@ -2,9 +2,12 @@ package com.example.apptienda;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.volley.VolleyError;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.Usuario;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,23 +32,37 @@ public class ExampleInstrumentedTest {
     @Test
     public void login() {
         try {
-            Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba123");
-            assertNotNull(usu);
-        } catch (ExecutionException | TimeoutException | JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Usuario.LogIn("ivan@gmail.xd","prueba123",new VolleyJSONCallback(){
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    assertNotNull(result);
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+        }catch (JSONException e) {
+
         }
     }
     @Test
     public void login_error() {
         try {
-            Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba120");
-            assertNull(usu);
-        }catch (ExecutionException | TimeoutException | JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Usuario.LogIn("ivan@gmail.xd","prueba120",new VolleyJSONCallback(){
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    assertNotNull(result);
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    assertNotNull(error);
+                }
+            });
+        }catch (JSONException e) {
+
         }
     }
 }

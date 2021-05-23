@@ -1,18 +1,18 @@
 package com.example.apptienda;
 
-import android.util.Log;
-
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.volley.VolleyError;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.models.Paquete;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -24,12 +24,19 @@ public class PostMethodTest {
     @Test
     public void obtenerPaquetes() {
         try {
-            ArrayList<Paquete> paquetes = (ArrayList<Paquete>) Paquete.obtenerPaquetes();
-            assertNotNull(paquetes);
-        } catch (ExecutionException e) { Log.e("error: ",e.getCause().toString());
-           fail();
-        } catch (InterruptedException e) {
-           fail();
+            Paquete.obtenerPaquetes(new VolleyJSONArrayCallback() {
+               @Override
+               public void onErrorResponse(VolleyError error) {
+                   fail();
+               }
+               @Override
+               public void onSuccessResponse(JSONArray response) {
+                    assertNotNull(response);
+               }
+           });
+        } catch (JSONException e) {
+            fail();
+            e.printStackTrace();
         }
     }
 }

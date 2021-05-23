@@ -3,33 +3,20 @@ package com.example.apptienda.models;
 
 
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-import android.os.Parcelable.Creator;
-import android.os.RemoteException;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.App;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.helpers.CustomJsonArrayRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
-import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class Paquete implements Parcelable
 {
@@ -152,50 +139,28 @@ public class Paquete implements Parcelable
         return sb.toString();
     }
 
-    public static List<Paquete> obtenerPaquetes() throws ExecutionException, InterruptedException {
-        CompletableFuture<ArrayList<Paquete>> future = new CompletableFuture<>();
-        try {
-            Gson gson=new Gson();
+    public static void obtenerPaquetes(VolleyJSONArrayCallback callback) throws JSONException {
             JSONObject objetoPeticion = new JSONObject();
-
             objetoPeticion.put("action", "list_packs");
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
-                    response -> {
-                        Log.i("RESPONSE",response.toString());
-                        ArrayList<Paquete> paquetes = gson.fromJson(response.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType());
-                        future.complete(paquetes);
-                    }
+                    response -> callback.onSuccessResponse(response)
                     ,
-                    error -> future.completeExceptionally(error));
+                    error -> callback.onErrorResponse(error));
             queue.add(request);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return future.get();
     }
-    public List<Producto> obtenerProductos() throws ExecutionException, InterruptedException {
-        CompletableFuture<ArrayList<Producto>> future = new CompletableFuture<>();
-        try {
-            Gson gson=new Gson();
+    public void obtenerProductos(VolleyJSONArrayCallback callback) throws JSONException {
             JSONObject objetoPeticion = new JSONObject();
             objetoPeticion.put("action", "assigned_products");
             objetoPeticion.put("id",this.getId());
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
-                    response -> {
-                        ArrayList<Producto> productos =gson.fromJson(response.toString(),new TypeToken<ArrayList<Producto>>(){}.getType());;
-                        future.complete(productos);
-                    }
+                    response -> callback.onSuccessResponse(response)
                     ,
-                    error -> future.completeExceptionally(new RemoteException()));
+                    error -> callback.onErrorResponse(error));
             queue.add(request);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return future.get();
     }
     @Override
     public int hashCode() {

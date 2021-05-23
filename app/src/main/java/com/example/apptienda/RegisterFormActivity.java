@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.apptienda.viewmodels.RegisterViewModel;
 
+import org.json.JSONException;
+
 public class RegisterFormActivity extends AppCompatActivity {
     RegisterViewModel vm;
     FragmentTransaction transaction;
@@ -59,9 +61,13 @@ public class RegisterFormActivity extends AppCompatActivity {
             error= form3.validateFields();
             if(error.length()==0) {
                 vm.rellenarUsuario();
-                vm.intentarRegistro();
-                Intent it=new Intent(App.getContext(), MainActivity.class);
-                App.getContext().startActivity(it);
+                try {
+                    vm.intentarRegistro();
+                    Intent it=new Intent(App.getContext(), MainActivity.class);
+                    App.getContext().startActivity(it);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             else{
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
