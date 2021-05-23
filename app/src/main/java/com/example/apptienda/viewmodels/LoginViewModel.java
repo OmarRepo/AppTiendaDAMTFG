@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 public class LoginViewModel extends ViewModel {
     public final ObservableField<String> email;
     public final ObservableField<String> password;
@@ -28,23 +30,15 @@ public class LoginViewModel extends ViewModel {
     }
     public void login() {
         if(validateFields()) {
-
-            Usuario.LogIn(email.get(), password.get(), new VolleyCallback() {
-                @Override
-                public void onSuccessResponse(String result) {
-
-                }
-                @Override
-                public void onSuccessResponse(JSONObject result) {
-                    Gson gson=new Gson();
-                    DataRepository.setUsuarioLogeado(gson.fromJson(result.toString(),Usuario.class));
-                    navigateToHome();
-                }
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(App.getContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                }
-            });
+            try {
+                Usuario usu = Usuario.LogIn(email.get(), password.get());
+                DataRepository.setUsuarioLogeado(usu);
+                navigateToHome();
+            } catch (ExecutionException e) {
+                Toast.makeText(App.getContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+            } catch (InterruptedException e) {
+                Toast.makeText(App.getContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     private boolean validateFields() {

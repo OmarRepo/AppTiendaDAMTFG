@@ -28,6 +28,8 @@ import com.example.apptienda.models.VolleyCallback;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 public class GalleryFragment extends Fragment {
     EditText nombre,apellido,dir,cod,fecha,tlf,correo,pass,ciudad;
     Button editarEdits;
@@ -98,24 +100,14 @@ public class GalleryFragment extends Fragment {
                     usu.setFechaNacimiento(fecha.getText().toString());
                     usu.setTelefono(tlf.getText().toString());
                     usu.setEmail(correo.getText().toString());
-                    Usuario.ModificarUsuario(usu, new VolleyCallback() {
-                        @Override
-                        public void onSuccessResponse(String result) {
-                            Toast.makeText(App.getContext(), R.string.exitoCambios, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onSuccessResponse(JSONObject result) {
-
-                        }
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    });
-
-
+                    try {
+                        usu=usu.ModificarUsuario();
+                        Toast.makeText(App.getContext(), R.string.exitoCambios, Toast.LENGTH_SHORT).show();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

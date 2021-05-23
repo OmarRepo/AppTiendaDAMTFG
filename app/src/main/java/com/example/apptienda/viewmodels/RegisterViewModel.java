@@ -16,6 +16,8 @@ import com.example.apptienda.models.VolleyCallback;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 public class RegisterViewModel extends ViewModel {
     public MutableLiveData<Usuario> registroUsuario;
     //form1
@@ -94,22 +96,15 @@ public class RegisterViewModel extends ViewModel {
         registroUsuario.setValue(usuarioNuevo);
     }
     public void intentarRegistro() {
-        Usuario.RegistrarUsuario(registroUsuario.getValue(),password.get(), new VolleyCallback() {
-            @Override
-            public void onSuccessResponse(String result) {
+        try {
+            Usuario usu = registroUsuario.getValue().RegistrarUsuario(password.get());
+            Toast.makeText(App.getContext(), "Registro de usuario: "+usu.getNombre()+"\nCompletado satisfactoriamente", Toast.LENGTH_SHORT).show();
+        } catch (ExecutionException e) {
+            Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
+        } catch (InterruptedException e) {
+            Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
+        }
 
-            }
-
-            @Override
-            public void onSuccessResponse(JSONObject result) {
-
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(App.getContext(), "Error al procesar el registro", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 }

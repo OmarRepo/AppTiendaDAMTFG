@@ -2,7 +2,6 @@ package com.example.apptienda.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.util.Patterns;
 
 import java.math.BigInteger;
@@ -11,8 +10,6 @@ import java.security.NoSuchAlgorithmException;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.App;
 import com.example.apptienda.helpers.SingletonRequestQueue;
@@ -23,9 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Objects;
-import java.util.regex.Pattern;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class Usuario implements Parcelable{
     @SerializedName("Id")
@@ -206,38 +203,30 @@ public class Usuario implements Parcelable{
                 ", ciudad='" + ciudad + '\'' +
                 '}';
     }
-    public static void RegistrarUsuario(Usuario usuario,String password,final VolleyCallback callback) {
+    public Usuario RegistrarUsuario(String password) throws ExecutionException, InterruptedException {
         Gson gson= new Gson();
+        CompletableFuture<Usuario> future = new CompletableFuture<>();
         try {
-            String usuarioJson = gson.toJson(usuario,Usuario.class);
+            String usuarioJson = gson.toJson(this,Usuario.class);
             String hash=getPassHass(password);
             String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             JSONObject usuarioObject = new JSONObject(usuarioJson);
             usuarioObject.put("hash_pass",hash);
             usuarioObject.put("action","register");
-            Log.i("todo listo registro:",usuarioObject.toString());
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, usuarioObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.i(getClass().getSimpleName(),response.toString());
-                            callback.onSuccessResponse(response);
-                        }
-                    }
+                    response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
                     ,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            callback.onErrorResponse(error);
-                        }
-                    });
+                    error -> future.completeExceptionally(error));
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return future.get();
     }
-    public static void LogIn(String email,String password, final VolleyCallback callback){
+    public static Usuario LogIn(String email, String password) throws ExecutionException, InterruptedException {
+        Gson gson= new Gson();
+        CompletableFuture<Usuario> future = new CompletableFuture<>();
         try {
             JSONObject logData = new JSONObject();
             logData.put("email",email);
@@ -246,54 +235,36 @@ public class Usuario implements Parcelable{
             String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            callback.onSuccessResponse(response);
-                        }
-                    }
+                    response -> future.complete(gson.fromJson(response.toString(),Usuario.class))
                     ,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            callback.onErrorResponse(error);
-                        }
-                    });
+                    error -> future.completeExceptionally(error));
             queue.add(request);
         }catch (JSONException e) {
            e.printStackTrace();
         }
+        return future.get();
     }
-    public static void ModificarUsuario(Usuario usuario,final VolleyCallback callback) {
+    public Usuario ModificarUsuario() throws ExecutionException, InterruptedException {
         Gson gson= new Gson();
+        CompletableFuture<Usuario> future = new CompletableFuture<>();
         try {
-            String usuarioJson = gson.toJson(usuario,Usuario.class);
+            String usuarioJson = gson.toJson(this,Usuario.class);
             JSONObject logData = new JSONObject(usuarioJson);
             logData.put("action","modficar");
-            Log.i("POSTDATA",logData.toString());
             String url="http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, url, logData,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Gson gson=new Gson();
-                            DataRepository.setUsuarioLogeado(gson.fromJson(response.toString(),Usuario.class));
-                            callback.onSuccessResponse(response);
-                        }
+                    response -> {
+                        future.complete(gson.fromJson(response.toString(),Usuario.class));
                     }
                     ,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            callback.onErrorResponse(error);
-                        }
-                    }
-                    );
+                    error -> future.completeExceptionally(error)
+            );
             queue.add(request);
         }catch (JSONException e) {
             e.printStackTrace();
         }
+        return future.get();
     }
 
     public static String getPassHass(String input) {

@@ -33,24 +33,9 @@ public class ExampleInstrumentedTest {
     //}
     @Test
     public void login() {
-        CompletableFuture<String> future = new CompletableFuture<>();
-
-        Usuario.LogIn("ivan@gmail.xd","prueba123", new VolleyCallback(){
-            @Override
-            public void onSuccessResponse(String result) {
-                future.complete("fail");
-            }
-            @Override
-            public void onSuccessResponse(JSONObject result) {
-                future.complete("ok");
-            }
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                future.complete("fail");
-            }
-        });
         try {
-            assertEquals("ok", future.get());
+            Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba123");
+            assertNotNull(usu);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -59,26 +44,9 @@ public class ExampleInstrumentedTest {
     }
     @Test
     public void login_error() {
-        CompletableFuture<String> future = new CompletableFuture<>();
-
-        Usuario.LogIn("ivan@gmail.xd","prueba120", new VolleyCallback(){
-            @Override
-            public void onSuccessResponse(String result) {
-                future.complete("fail");
-            }
-
-            @Override
-            public void onSuccessResponse(JSONObject result) {
-                future.complete("fail");
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                future.complete("ok");
-            }
-        });
         try {
-            assertEquals("ok", future.get());
+            Usuario usu = Usuario.LogIn("ivan@gmail.xd","prueba120");
+            assertNull(usu);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

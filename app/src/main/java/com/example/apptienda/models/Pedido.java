@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.App;
+import com.example.apptienda.helpers.CustomJsonArrayRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -191,7 +192,7 @@ public class Pedido implements Parcelable
         }
         return sb.toString();
     }
-    public static ArrayList<Pedido> obtenerPedidos() throws ExecutionException, InterruptedException {
+    public static List<Pedido> obtenerPedidos() throws ExecutionException, InterruptedException {
         CompletableFuture<ArrayList<Pedido>> future = new CompletableFuture<>();
         try {
             Gson gson=new Gson();
@@ -200,21 +201,13 @@ public class Pedido implements Parcelable
             objetoPeticion.put("action", "list_orders");
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, objetoPeticion,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            ArrayList<Pedido> pedidos = gson.fromJson(response.toString(),new TypeToken<ArrayList<Pedido>>(){}.getType());
-                            future.complete(pedidos);
-                        }
+            CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
+                    response -> {
+                        ArrayList<Pedido> pedidos = gson.fromJson(response.toString(),new TypeToken<ArrayList<Pedido>>(){}.getType());
+                        future.complete(pedidos);
                     }
                     ,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            future.completeExceptionally(new RemoteException());
-                        }
-                    });
+                    error -> future.completeExceptionally(new RemoteException()));
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -231,20 +224,12 @@ public class Pedido implements Parcelable
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, objetoPeticion,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            gson.fromJson(response.toString(),Pedido.class);
-                            future.complete(true);
-                        }
+                    response -> {
+                        gson.fromJson(response.toString(),Pedido.class);
+                        future.complete(true);
                     }
                     ,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            future.complete(false);
-                        }
-                    });
+                    error -> future.complete(false));
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
