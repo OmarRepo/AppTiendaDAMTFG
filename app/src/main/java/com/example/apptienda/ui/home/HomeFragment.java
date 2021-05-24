@@ -36,9 +36,9 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment {
-    public  MyRecyclerViewAdapter adapter;
+    public  PaqueteAdapter adapter;
     private HomeViewModel homeViewModel;
-    public List<Paquete> ListaPaquetes;
+    public ArrayList<Paquete> ListaPaquetes;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -72,13 +72,13 @@ public class HomeFragment extends Fragment {
                     paquetes.add(pack.toString());
                 }
                 rv.setLayoutManager(new LinearLayoutManager(App.getContext()));
-                adapter = new MyRecyclerViewAdapter(App.getContext(), paquetes);
-                adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
+                adapter = new PaqueteAdapter(ListaPaquetes);
+              /*  adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
                     @Override
                     public void onItemClick(View view, int position) {
                         Toast.makeText(App.getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
                 rv.setAdapter(adapter);
             }
             @Override
