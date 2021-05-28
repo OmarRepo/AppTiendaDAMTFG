@@ -3,15 +3,20 @@ package com.example.apptienda.models;
 
 
 import android.os.Parcelable;
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.example.apptienda.App;
+import com.example.apptienda.R;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.helpers.CustomJsonArrayRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,6 +82,11 @@ public class Paquete implements Parcelable
         this.nombre = nombre;
         this.img = img;
         this.borrado = borrado;
+    }
+
+    @BindingAdapter({"imagenPaquete"})
+    public static void loadImage(ImageView imagenView, String url) {
+        Picasso.get().load(url).placeholder(R.drawable.ic_launcher_background).into(imagenView);
     }
 
     public String getId() {

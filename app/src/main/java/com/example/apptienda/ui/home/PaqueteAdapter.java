@@ -6,66 +6,64 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apptienda.App;
+import com.example.apptienda.MyRecyclerViewAdapter;
+import com.example.apptienda.databinding.FragmentHomeBinding;
+import com.example.apptienda.databinding.PaqueteCardLayoutBinding;
 import com.example.apptienda.models.Paquete;
 import com.example.apptienda.R;
 import com.squareup.picasso.Picasso;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-public class PaqueteAdapter extends RecyclerView.Adapter<PaqueteAdapter.MyViewHolder> {
+public class PaqueteAdapter extends RecyclerView.Adapter<PaqueteAdapter.PaqueteHolder> {
 
 
-        private ArrayList<Paquete> dataSet;
+    private ArrayList<Paquete> paquetes;
 
-        public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public PaqueteAdapter() {
+        this.paquetes = new ArrayList<>();
+    }
+    public PaqueteAdapter(ArrayList<Paquete> paquetes) {
+        this.paquetes = paquetes;
+    }
+    public void setData(ArrayList<Paquete> paquetes) {
+        this.paquetes=paquetes;
+    }
+    @Override
+    public PaqueteAdapter.PaqueteHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        PaqueteCardLayoutBinding binding = PaqueteCardLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new PaqueteHolder(binding);
+    }
 
-            TextView textViewName;
-            TextView textViewVersion;
-            ImageView imageViewIcon;
+    @Override
+    public void onBindViewHolder(@NonNull @NotNull PaqueteAdapter.PaqueteHolder holder, int position) {
+        holder.bind(paquetes.get(position));
+    }
 
-            public MyViewHolder(View itemView) {
-                super(itemView);
-                this.textViewName = (TextView) itemView.findViewById(R.id.id_nombrePaquete);
-                this.textViewVersion = (TextView) itemView.findViewById(R.id.id_textoPaquete);
-                this.imageViewIcon = (ImageView) itemView.findViewById(R.id.id_imagenPaquete);
-            }
+    @Override
+    public int getItemCount() {
+            return paquetes.size();
         }
 
-        public PaqueteAdapter(ArrayList<Paquete> data) {
-            this.dataSet = data;
+    public class PaqueteHolder extends RecyclerView.ViewHolder {
+        public PaqueteCardLayoutBinding rowBinding;
+
+        public PaqueteHolder(PaqueteCardLayoutBinding itemRowBinding) {
+            super(itemRowBinding.getRoot());
+            this.rowBinding = itemRowBinding;
         }
 
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                               int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.paquete_card_layout, parent, false);
-
-           // view.setOnClickListener(MainActivity.myOnClickListener);
-
-            MyViewHolder myViewHolder = new MyViewHolder(view);
-            return myViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
-            TextView textViewName = holder.textViewName;
-            TextView textViewVersion = holder.textViewVersion;
-            ImageView imageView = holder.imageViewIcon;
-
-            textViewName.setText(dataSet.get(listPosition).getNombre());
-            textViewVersion.setText(dataSet.get(listPosition).getId());
-            Picasso.get().load(dataSet.get(listPosition).getImg()).resize(150,150).centerCrop().into(imageView);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataSet.size();
+        public void bind(Object obj) {
+            rowBinding.setViewModel((Paquete) obj);
+            rowBinding.executePendingBindings();
         }
     }
+}
 
