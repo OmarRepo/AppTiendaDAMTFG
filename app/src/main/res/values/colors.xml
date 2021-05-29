@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azul_letra">#3258a8</color>
+    <color name="azul_backgroudn">#77c7b9</color>
+    <color name="un">#3258a8</color>
+    <color name="ds">#3258a8</color>
 
 
 </resources>
