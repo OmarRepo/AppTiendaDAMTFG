@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.ui.home.HomeViewModel"/>
+            type="com.example.apptienda.homefragments.tienda.TiendaViewModel"/>
     </data>
 
     <LinearLayout

@@ -1,17 +1,13 @@
 package com.example.apptienda.viewmodels;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.android.volley.VolleyError;
-import com.example.apptienda.App;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.HomeActivity;
 import com.example.apptienda.RegisterFormActivity;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
@@ -21,9 +17,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 public class LoginViewModel extends ViewModel {
     public final ObservableField<String> email;
@@ -62,7 +55,7 @@ public class LoginViewModel extends ViewModel {
     private void navigateToHome() {
         actionsEnabled.set(false);
         Intent it=new Intent(App.getContext(), HomeActivity.class);
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         App.getContext().startActivity(it);
         actionsEnabled.set(true);
     }

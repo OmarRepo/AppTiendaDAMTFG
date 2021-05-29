@@ -3,23 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_tienda">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.apptienda.ui.home.HomeFragment"
+        android:id="@+id/nav_tienda"
+        android:name="com.example.apptienda.homefragments.tienda.TiendaFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/tienda_fragment" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.apptienda.ui.Perfil.PerfilFragment"
+        android:id="@+id/nav_perfil"
+        android:name="com.example.apptienda.homefragments.perfil.PerfilFragment"
         android:label="@string/perfilUsuario"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/perfil_fragment" >
+        <action
+            android:id="@+id/action_nav_perfil_pop_including_nav_tienda"
+            app:popUpTo="@id/nav_tienda" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.apptienda.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_pedidos"
+        android:name="com.example.apptienda.homefragments.pedidos.PedidosFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/pedidos_fragment" >
+        <action
+            android:id="@+id/action_nav_pedidos_pop_including_nav_tienda"
+            app:popUpTo="@id/nav_tienda" />
+    </fragment>
+
 </navigation>

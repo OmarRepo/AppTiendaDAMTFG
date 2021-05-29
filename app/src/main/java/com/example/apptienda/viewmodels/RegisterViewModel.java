@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.android.volley.VolleyError;
-import com.example.apptienda.App;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.Usuario;
 import com.google.gson.Gson;

@@ -1,9 +1,7 @@
-package com.example.apptienda.ui.Perfil;
+package com.example.apptienda.homefragments.perfil;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.VolleyError;
-import com.example.apptienda.App;
-import com.example.apptienda.DatePickerFragment;
+import com.example.apptienda.helpers.App;
+import com.example.apptienda.helpers.DatePickerFragment;
 import com.example.apptienda.R;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.DataRepository;
@@ -28,9 +26,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 public class PerfilFragment extends Fragment {
     EditText nombre,apellido,dir,cod,fecha,tlf,correo,pass,ciudad;
@@ -42,7 +37,7 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        View root = inflater.inflate(R.layout.perfil_fragment, container, false);
         /*final TextView textView = root.findViewById(R.id.text_gallery);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

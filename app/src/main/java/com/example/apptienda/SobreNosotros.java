@@ -14,7 +14,7 @@ public class SobreNosotros extends AppCompatActivity {
         setContentView(R.layout.activity_sobre_nosotros);
     }
     public void volverTienda(View view){
-        Intent it = new Intent(this, MainActivity.class);
+        Intent it = new Intent(this, LoginActivity.class);
         startActivity(it);
 
     }

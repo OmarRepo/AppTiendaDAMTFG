@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.apptienda.App;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
@@ -22,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
 
 public class Usuario implements Parcelable{
     @SerializedName("id")

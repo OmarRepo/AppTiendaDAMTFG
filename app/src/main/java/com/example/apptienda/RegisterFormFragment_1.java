@@ -1,6 +1,5 @@
 package com.example.apptienda;
 
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.apptienda.databinding.RegisterFormFragment1FragmentBinding;
+import com.example.apptienda.helpers.DatePickerFragment;
 import com.example.apptienda.viewmodels.RegisterViewModel;
 
 public class RegisterFormFragment_1 extends Fragment {

@@ -2,15 +2,12 @@
 package com.example.apptienda.models;
 
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 import android.os.RemoteException;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.apptienda.App;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.CustomJsonArrayRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
@@ -22,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;

@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.example.apptienda.App;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.R;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.helpers.CustomJsonArrayRequest;

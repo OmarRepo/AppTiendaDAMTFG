@@ -1,4 +1,4 @@
-package com.example.apptienda.ui.Perfil;
+package com.example.apptienda.homefragments.perfil;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

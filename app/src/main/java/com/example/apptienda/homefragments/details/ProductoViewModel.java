@@ -1,4 +1,4 @@
-package com.example.apptienda.ui.details;
+package com.example.apptienda.homefragments.details;
 
 import androidx.lifecycle.ViewModel;
 

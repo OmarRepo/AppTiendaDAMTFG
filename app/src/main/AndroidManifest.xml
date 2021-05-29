@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name=".helpers.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,9 +15,7 @@
         android:theme="@style/Theme.AppTienda"
         android:networkSecurityConfig="@xml/network_security_config">
 
-
         <activity android:name=".SobreNosotros"></activity>
-        <activity android:name=".perfil_usuario" />
         <activity android:name=".RegisterFormActivity" />
         <activity
             android:name=".HomeActivity"
@@ -28,7 +26,7 @@
         <activity
             android:name=".Basura.Registro"
             android:label="@string/registro" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

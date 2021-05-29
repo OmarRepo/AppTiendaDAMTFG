@@ -1,31 +1,26 @@
-package com.example.apptienda.ui.home;
+package com.example.apptienda.homefragments.tienda;
 
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
-import com.example.apptienda.App;
-import com.example.apptienda.R;
-import com.example.apptienda.databinding.FragmentHomeBinding;
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.models.Paquete;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class HomeViewModel extends ViewModel {
+public class TiendaViewModel extends ViewModel {
 
     static {
         listaPaquetes = new MutableLiveData<>();
@@ -33,7 +28,7 @@ public class HomeViewModel extends ViewModel {
     private static MutableLiveData<ArrayList<Paquete>> listaPaquetes;
 
 
-    public HomeViewModel() {
+    public TiendaViewModel() {
 
     }
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.viewmodels.RegisterViewModel;
 
 import org.json.JSONException;
@@ -63,7 +64,7 @@ public class RegisterFormActivity extends AppCompatActivity {
                 vm.rellenarUsuario();
                 try {
                     vm.intentarRegistro();
-                    Intent it=new Intent(App.getContext(), MainActivity.class);
+                    Intent it=new Intent(App.getContext(), LoginActivity.class);
                     App.getContext().startActivity(it);
                 } catch (JSONException e) {
                     e.printStackTrace();
