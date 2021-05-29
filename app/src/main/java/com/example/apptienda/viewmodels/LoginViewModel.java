@@ -62,6 +62,7 @@ public class LoginViewModel extends ViewModel {
     private void navigateToHome() {
         actionsEnabled.set(false);
         Intent it=new Intent(App.getContext(), HomeActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         App.getContext().startActivity(it);
         actionsEnabled.set(true);
     }
