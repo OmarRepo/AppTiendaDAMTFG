@@ -21,9 +21,11 @@ import com.android.volley.VolleyError;
 import com.example.apptienda.App;
 import com.example.apptienda.MyRecyclerViewAdapter;
 import com.example.apptienda.R;
+import com.example.apptienda.databinding.FragmentHomeBinding;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.models.Paquete;
 import com.example.apptienda.models.Usuario;
+import com.example.apptienda.viewmodels.RegisterViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,55 +39,24 @@ import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment {
     public  PaqueteAdapter adapter;
-    private HomeViewModel homeViewModel;
+    private HomeViewModel vm;
     public ArrayList<Paquete> ListaPaquetes;
+    private FragmentHomeBinding binding;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        return root;
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        vm = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
+        binding.setViewModel(vm);
+        binding.executePendingBindings();
+        return binding.getRoot();
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        try {
-            obtenerDatos();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
     }
 
-
-
-    public void obtenerDatos() throws JSONException {
-        Paquete.obtenerPaquetes(new VolleyJSONArrayCallback() {
-            @Override
-            public void onSuccessResponse(JSONArray result) {
-                Gson gson = new Gson();
-                ListaPaquetes = gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType());
-                RecyclerView rv = getView().findViewById(R.id.listaPaquetes);
-                ArrayList<String> paquetes = new ArrayList<>();
-                for(Paquete pack:ListaPaquetes){
-                    paquetes.add(pack.toString());
-                }
-                rv.setLayoutManager(new LinearLayoutManager(App.getContext()));
-                adapter = new PaqueteAdapter(ListaPaquetes);
-              /*  adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener(){
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Toast.makeText(App.getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-                rv.setAdapter(adapter);
-            }
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
     }
-
 }
