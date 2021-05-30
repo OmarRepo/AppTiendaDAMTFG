@@ -10,6 +10,11 @@
         android:name="com.example.apptienda.homefragments.tienda.TiendaFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/tienda_fragment" />
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="com.example.apptienda.homefragments.details.ProductoFragment"
+        android:label="detail"
+        tools:layout="@layout/producto_fragment" />
 
     <fragment
         android:id="@+id/nav_perfil"

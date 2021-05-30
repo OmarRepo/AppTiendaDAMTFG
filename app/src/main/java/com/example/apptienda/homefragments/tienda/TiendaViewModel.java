@@ -40,7 +40,6 @@ public class TiendaViewModel extends ViewModel {
     }
 
 
-
     @BindingAdapter("listData")
     public static void actualizarPaquetes(RecyclerView recyclerView,ArrayList<Paquete> paquetes) {
         try {
@@ -52,10 +51,9 @@ public class TiendaViewModel extends ViewModel {
                     recyclerView.setAdapter(new PaqueteAdapter(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType())));
                     PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
                     adapter.setClickListener((view, position) ->{
-                        DataRepository.postPaqueteElegido(adapter.getItem(position));
+                        DataRepository.setPaqueteElegido(adapter.getItem(position));
                         NavController navController = Navigation.findNavController((Activity)recyclerView.getContext(), R.id.nav_host_fragment);
                         navController.navigate(R.id.nav_details);
-                        Toast.makeText(App.getContext(), "Clickeado pos "+position, Toast.LENGTH_SHORT).show();
                     });
                 }
                 @Override
@@ -66,6 +64,5 @@ public class TiendaViewModel extends ViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -5,10 +5,16 @@ package com.example.apptienda.models;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 import android.os.Parcelable.Creator;
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.example.apptienda.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
-    public class Producto implements Parcelable
+public class Producto implements Parcelable
     {
         //Atribtos de la clase
         @SerializedName("id")
@@ -43,9 +49,7 @@ import com.google.gson.annotations.SerializedName;
                 return (new Producto[size]);
             }
 
-        }
-                ;
-
+        };
         protected Producto(android.os.Parcel in) {
             this.id = ((String) in.readValue((String.class.getClassLoader())));
             this.nombre = ((String) in.readValue((String.class.getClassLoader())));
@@ -201,6 +205,10 @@ import com.google.gson.annotations.SerializedName;
 
         public int describeContents() {
             return 0;
+        }
+        @BindingAdapter({"imagenProducto"})
+        public static void loadImage(ImageView imagenView, String url) {
+            Picasso.get().load(url).placeholder(R.drawable.ic_launcher_background).into(imagenView);
         }
 
     }

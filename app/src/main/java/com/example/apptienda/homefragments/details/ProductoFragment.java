@@ -13,10 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apptienda.R;
+import com.example.apptienda.databinding.ProductoFragmentBinding;
+import com.example.apptienda.databinding.TiendaFragmentBinding;
+import com.example.apptienda.homefragments.tienda.TiendaViewModel;
+import com.example.apptienda.models.DataRepository;
+import com.example.apptienda.viewmodels.HomeViewModel;
 
 public class ProductoFragment extends Fragment {
 
-    private ProductoViewModel mViewModel;
+    private ProductoViewModel vm;
+    private ProductoFragmentBinding binding;
 
     public static ProductoFragment newInstance() {
         return new ProductoFragment();
@@ -25,14 +31,22 @@ public class ProductoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.producto_fragment, container, false);
+
+        binding = ProductoFragmentBinding.inflate(inflater,container,false);
+        vm = new ViewModelProvider(getActivity()).get(ProductoViewModel.class);
+        binding.setViewModel(vm);
+        binding.executePendingBindings();
+        return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
-        // TODO: Use the ViewModel
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        vm.getPaquete().setValue(DataRepository.getPaqueteElegido());
+    }
 }
