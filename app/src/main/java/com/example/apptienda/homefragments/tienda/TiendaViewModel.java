@@ -6,9 +6,12 @@ import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
+import com.example.apptienda.R;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.models.Paquete;
@@ -46,6 +49,10 @@ public class TiendaViewModel extends ViewModel {
                     Gson gson = new Gson();
                     listaPaquetes.setValue(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
                     recyclerView.setAdapter(new PaqueteAdapter(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType())));
+                    PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
+                    adapter.setClickListener((view, position) ->{
+                        Toast.makeText(App.getContext(), "Clickeado pos "+position, Toast.LENGTH_SHORT).show();
+                    });
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {

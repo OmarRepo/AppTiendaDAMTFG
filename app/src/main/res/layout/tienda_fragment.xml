@@ -30,7 +30,7 @@
             android:layout_weight="0.9"
             app:listData="@{viewModel.paquetes}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/paquete_card_layout"/>
+            tools:listitem="@layout/paquete_card_layout" />
 
     </LinearLayout>
 </layout>
