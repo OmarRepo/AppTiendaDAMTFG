@@ -30,5 +30,14 @@
             android:id="@+id/action_nav_pedidos_pop_including_nav_tienda"
             app:popUpTo="@id/nav_tienda" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="com.example.apptienda.homefragments.details.ProductoFragment"
+        android:label="detail"
+        tools:layout="@layout/producto_fragment" >
+        <action
+            android:id="@+id/action_nav_details_to_nav_tienda"
+            app:popUpTo="@id/nav_tienda" />
+    </fragment>
 
 </navigation>

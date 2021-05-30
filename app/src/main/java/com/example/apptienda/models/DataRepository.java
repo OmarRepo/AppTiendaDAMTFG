@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData;
 
 
 public class DataRepository {
+    private static MutableLiveData<Usuario> usuarioLogeado;
+    private static MutableLiveData<Paquete> paqueteElegido;
     static {
         usuarioLogeado=new MutableLiveData<>();
+        paqueteElegido=new MutableLiveData<>();
     }
     private DataRepository() {
         throw new IllegalStateException("Utility class");
     }
-    private static MutableLiveData<Usuario> usuarioLogeado;
 
     public static Usuario getUsuarioLogeado() {
         return usuarioLogeado.getValue();
@@ -21,5 +23,15 @@ public class DataRepository {
     }
     public static void postUsuarioLogeado(Usuario usuarioLogeado) {
         DataRepository.usuarioLogeado.postValue(usuarioLogeado);
+    }
+
+    public static Paquete getPaqueteElegido() {
+        return paqueteElegido.getValue();
+    }
+    public static void setPaqueteElegido(Paquete paqueteElegido) {
+        DataRepository.paqueteElegido.setValue(paqueteElegido);
+    }
+    public static void postPaqueteElegido(Paquete paqueteElegido) {
+        DataRepository.paqueteElegido.postValue(paqueteElegido);
     }
 }

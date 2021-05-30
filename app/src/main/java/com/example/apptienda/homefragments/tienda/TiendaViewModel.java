@@ -1,5 +1,6 @@
 package com.example.apptienda.homefragments.tienda;
 
+import android.app.Activity;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
@@ -14,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.example.apptienda.R;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
+import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Paquete;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,14 +32,13 @@ public class TiendaViewModel extends ViewModel {
     }
     private static MutableLiveData<ArrayList<Paquete>> listaPaquetes;
 
-
     public TiendaViewModel() {
 
     }
-
     public LiveData<ArrayList<Paquete>> getPaquetes() {
         return listaPaquetes;
     }
+
 
 
     @BindingAdapter("listData")
@@ -51,6 +52,9 @@ public class TiendaViewModel extends ViewModel {
                     recyclerView.setAdapter(new PaqueteAdapter(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType())));
                     PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
                     adapter.setClickListener((view, position) ->{
+                        DataRepository.postPaqueteElegido(adapter.getItem(position));
+                        NavController navController = Navigation.findNavController((Activity)recyclerView.getContext(), R.id.nav_host_fragment);
+                        navController.navigate(R.id.nav_details);
                         Toast.makeText(App.getContext(), "Clickeado pos "+position, Toast.LENGTH_SHORT).show();
                     });
                 }

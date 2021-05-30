@@ -160,7 +160,7 @@ public class Paquete implements Parcelable
                     error -> callback.onErrorResponse(error));
             queue.add(request);
     }
-    public void obtenerProductos(VolleyJSONArrayCallback callback) throws JSONException {
+    public  void obtenerProductos(VolleyJSONArrayCallback callback) throws JSONException {
             JSONObject objetoPeticion = new JSONObject();
             objetoPeticion.put("action", "assigned_products");
             objetoPeticion.put("id",this.getId());

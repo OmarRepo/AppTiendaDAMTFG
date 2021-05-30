@@ -75,13 +75,6 @@
                 android:onClick="registrarse"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ir_Perfil"
-            android:enabled="@{viewModel.actionsEnabled}"
-            android:onClick="ir_pagUsuario"/>
 
     </LinearLayout>
 </layout>
