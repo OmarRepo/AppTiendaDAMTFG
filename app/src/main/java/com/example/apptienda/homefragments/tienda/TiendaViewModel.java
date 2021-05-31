@@ -51,6 +51,7 @@ public class TiendaViewModel extends ViewModel {
                     listaPaquetes.setValue(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
                     PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
                     adapter.setData(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
+                    adapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {
