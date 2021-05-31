@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class TiendaViewModel extends ViewModel {
 
@@ -39,7 +41,6 @@ public class TiendaViewModel extends ViewModel {
         return listaPaquetes;
     }
 
-
     @BindingAdapter("listData")
     public static void actualizarPaquetes(RecyclerView recyclerView,ArrayList<Paquete> paquetes) {
         try {
@@ -48,13 +49,8 @@ public class TiendaViewModel extends ViewModel {
                 public void onSuccessResponse(JSONArray result) {
                     Gson gson = new Gson();
                     listaPaquetes.setValue(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
-                    recyclerView.setAdapter(new PaqueteAdapter(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType())));
                     PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
-                    adapter.setClickListener((view, position) ->{
-                        DataRepository.setPaqueteElegido(adapter.getItem(position));
-                        NavController navController = Navigation.findNavController((Activity)recyclerView.getContext(), R.id.nav_host_fragment);
-                        navController.navigate(R.id.nav_details);
-                    });
+                    adapter.setData(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {

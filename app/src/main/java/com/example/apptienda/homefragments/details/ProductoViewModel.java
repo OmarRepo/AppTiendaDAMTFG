@@ -31,7 +31,7 @@ public class ProductoViewModel extends ViewModel {
     private static MutableLiveData<Paquete> paqueteElegido;
 
     public ProductoViewModel() {
-        paqueteElegido=new MutableLiveData<>(DataRepository.getPaqueteElegido());
+        paqueteElegido=DataRepository.getPaqueteElegido();
     }
 
     public static MutableLiveData<ArrayList<Producto>> getProductos() {
@@ -44,7 +44,7 @@ public class ProductoViewModel extends ViewModel {
     @BindingAdapter("listProducto")
     public static void actualizarProductos(RecyclerView recyclerView, ArrayList<Producto> productos) {
         try {
-            DataRepository.getPaqueteElegido().obtenerProductos(new VolleyJSONArrayCallback(){
+            DataRepository.getPaqueteElegido().getValue().obtenerProductos(new VolleyJSONArrayCallback(){
                 @Override
                 public void onSuccessResponse(JSONArray result) {
                     Gson gson = new Gson();

@@ -47,6 +47,5 @@ public class ProductoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        vm.getPaquete().setValue(DataRepository.getPaqueteElegido());
     }
 }

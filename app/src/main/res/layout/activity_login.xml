@@ -7,74 +7,93 @@
             name="viewModel"
             type="com.example.apptienda.viewmodels.LoginViewModel" />
     </data>
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".LoginActivity"
-        android:gravity="center"
-        android:layout_margin="16dp">
-        <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/loginBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/correo"
-            android:text="@={viewModel.email}"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:textColor="@color/azul_letra" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTintMode="screen">
-
-            <EditText
-                android:id="@+id/pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/contraseña"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:text="@={viewModel.password}"
-                android:textColor="@color/azul_letra" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
+            android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".LoginActivity"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_margin="16dp">
 
-            <Button
-                android:id="@+id/Login"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:enabled="@{viewModel.actionsEnabled}"
-                android:onClick="login"
-                android:text="@string/acceder" />
+                android:layout_marginBottom="32dp"
+                android:adjustViewBounds="false"
+                android:scaleType="centerInside"
+                tools:srcCompat="@tools:sample/avatars" />
 
-            <Button
-                android:id="@+id/registrar"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/correo"
+                    android:text="@={viewModel.email}"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/azul_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_weight="1"
-                android:enabled="@{viewModel.actionsEnabled}"
-                android:text="@string/registrar"
-                android:onClick="registrarse"/>
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTintMode="screen">
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/contraseña"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:text="@={viewModel.password}"
+                    android:textColor="@color/azul_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/Login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:enabled="@{viewModel.actionsEnabled}"
+                    android:onClick="login"
+                    android:text="@string/acceder" />
+
+                <Button
+                    android:id="@+id/registrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:enabled="@{viewModel.actionsEnabled}"
+                    android:text="@string/registrar"
+                    android:onClick="registrarse"/>
+            </LinearLayout>
+
+
         </LinearLayout>
+    </FrameLayout>
 
-
-    </LinearLayout>
 </layout>
