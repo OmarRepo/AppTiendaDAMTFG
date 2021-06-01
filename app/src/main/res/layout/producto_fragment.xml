@@ -39,7 +39,7 @@
                 android:background="@drawable/round_corners"
                 android:backgroundTint="#009688"
                 android:padding="2dp"
-                android:text="@{viewModel.paquete.nombre,default=`Nombre del paquete`"
+                android:text="@{viewModel.paquete.nombre,default=`Nombre del paquete`}"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold|italic"

@@ -29,7 +29,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
-import jp.wasabeef.picasso.transformations.BlurTransformation;
 
 public class TiendaFragment extends Fragment {
     private TiendaViewModel vm;
