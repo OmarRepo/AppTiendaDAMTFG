@@ -2,6 +2,7 @@ package com.example.apptienda.homefragments.carrito;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.VolleyError;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
-import com.example.apptienda.homefragments.tienda.PaqueteAdapter;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Paquete;
 import com.example.apptienda.models.Usuario;
@@ -46,18 +46,19 @@ public class CarritoViewModel extends ViewModel {
                 @Override
                 public void onSuccessResponse(JSONArray result) {
                     Gson gson = new Gson();
-                    ArrayList<Paquete> ArrayPaquete=(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
+                    ArrayList<Paquete> arrayPaquete=(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
+                    ArrayList<Paquete> arrayFiltrado=new ArrayList<>();
                     Usuario usuario = DataRepository.getUsuarioLogeado();
                     SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
                     HashSet<String> cartSet=new HashSet<>(cart.getStringSet("cart",new HashSet<String>()));
-                    /*for (int x=0;x<= ArrayPaquete.size();x++){
-                        if(!cartSet.contains(ArrayPaquete.get(x).getId())){
-                            ArrayPaquete.remove(x);
+                    for (int x=0;x< arrayPaquete.size();x++){
+                        if(cartSet.contains(arrayPaquete.get(x).getId())){
+                           arrayFiltrado.add(arrayPaquete.get(x));
                         }
-                    }*/
-                    listaPaquetes.setValue(ArrayPaquete);
-                    PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
-                    adapter.setData(ArrayPaquete);
+                    }
+                    listaPaquetes.setValue(arrayFiltrado);
+                    CarritoAdapter adapter=(CarritoAdapter) recyclerView.getAdapter();
+                    adapter.setData(arrayFiltrado);
                     adapter.notifyDataSetChanged();
                 }
                 @Override
@@ -68,4 +69,15 @@ public class CarritoViewModel extends ViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }}
+    }
+    public void removeFromCart(Paquete paquete) {
+        Usuario usuario = DataRepository.getUsuarioLogeado();
+        SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
+        HashSet<String> cartSet=new HashSet<>(cart.getStringSet("cart",new HashSet<String>()));
+        cartSet.remove(paquete.getId());
+        if(cart.edit().putStringSet("cart",cartSet).commit()){
+            Toast.makeText(App.getContext(), "Esto se ejecuta y el id del paquete es "+paquete.getId(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+}

@@ -60,7 +60,6 @@ public class TiendaFragment extends Fragment {
                 ((PaqueteAdapter)rv.getAdapter()).getFilter().filter(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 RecyclerView rv=getView().findViewById(R.id.listaPaquetes);

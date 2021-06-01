@@ -17,15 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.apptienda.R;
+import com.example.apptienda.databinding.CarritoFragmentBinding;
+import com.example.apptienda.databinding.TiendaFragmentBinding;
 import com.example.apptienda.homefragments.tienda.PaqueteAdapter;
+import com.example.apptienda.homefragments.tienda.TiendaViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
 public class CarritoFragment extends Fragment {
-
-    private CarritoViewModel mViewModel;
-
+    private CarritoViewModel vm;
+    private CarritoFragmentBinding binding;
     public static CarritoFragment newInstance() {
         return new CarritoFragment();
     }
@@ -33,12 +35,19 @@ public class CarritoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.carrito_fragment, container, false);
+        binding = CarritoFragmentBinding.inflate(inflater,container,false);
+        vm = new ViewModelProvider(getActivity()).get(CarritoViewModel.class);
+        binding.setViewModel(vm);
+        binding.executePendingBindings();
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RecyclerView rv=getView().findViewById(R.id.carritoPaquetes);
+        rv.setAdapter(new CarritoAdapter(vm));
+        CarritoAdapter adapter=(CarritoAdapter) rv.getAdapter();
         FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.floatingCrearPedido);
         fab.setOnClickListener(view1 ->{
 
