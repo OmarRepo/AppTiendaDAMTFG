@@ -1,6 +1,9 @@
 package com.example.apptienda.homefragments.details;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
@@ -10,18 +13,23 @@ import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
+import com.example.apptienda.R;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Paquete;
 import com.example.apptienda.models.Producto;
+import com.example.apptienda.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProductoViewModel extends ViewModel {
     static {
@@ -59,6 +67,23 @@ public class ProductoViewModel extends ViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+    }
+    @BindingAdapter({"imagenPaquete"})
+    public static void loadImage(ImageView imagenView, String url) {
+        Picasso.get().load(url).placeholder(R.drawable.ic_launcher_background).into(imagenView);
+    }
+    public boolean addToCart() {
+        Paquete paquete = paqueteElegido.getValue();
+        Usuario usuario =DataRepository.getUsuarioLogeado();
+        if(paquete==null) {
+            return false;
+        }
+        SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
+        HashSet<String> cartSet=new HashSet<>(cart.getStringSet("cart",new HashSet<String>()));
+        if(cartSet.add(paquete.getId())){
+            cart.edit().putStringSet("cart",cartSet).apply();
+            return true;
+        }
+        return false;
     }
 }

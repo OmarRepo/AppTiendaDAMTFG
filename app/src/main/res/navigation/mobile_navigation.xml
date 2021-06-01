@@ -8,13 +8,8 @@
     <fragment
         android:id="@+id/nav_tienda"
         android:name="com.example.apptienda.homefragments.tienda.TiendaFragment"
-        android:label="@string/menu_home"
+        android:label="Tienda"
         tools:layout="@layout/tienda_fragment" />
-    <fragment
-        android:id="@+id/nav_details"
-        android:name="com.example.apptienda.homefragments.details.ProductoFragment"
-        android:label="detail"
-        tools:layout="@layout/producto_fragment" />
 
     <fragment
         android:id="@+id/nav_perfil"
@@ -29,7 +24,7 @@
     <fragment
         android:id="@+id/nav_pedidos"
         android:name="com.example.apptienda.homefragments.pedidos.PedidosFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Pedidos"
         tools:layout="@layout/pedidos_fragment" >
         <action
             android:id="@+id/action_nav_pedidos_pop_including_nav_tienda"
@@ -40,6 +35,15 @@
         android:name="com.example.apptienda.homefragments.details.ProductoFragment"
         android:label="detail"
         tools:layout="@layout/producto_fragment" >
+        <action
+            android:id="@+id/action_nav_details_to_nav_tienda"
+            app:popUpTo="@id/nav_tienda" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_carrito"
+        android:name="com.example.apptienda.homefragments.carrito.CarritoFragment"
+        android:label="carrito"
+        tools:layout="@layout/carrito_fragment" >
         <action
             android:id="@+id/action_nav_details_to_nav_tienda"
             app:popUpTo="@id/nav_tienda" />

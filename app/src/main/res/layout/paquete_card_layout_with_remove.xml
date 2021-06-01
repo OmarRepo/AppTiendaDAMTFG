@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.models.Producto" />
+            type="com.example.apptienda.models.Paquete" />
     </data>
 
     <LinearLayout
@@ -48,16 +48,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/id_nombrePaquete"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:text="@{viewModel.id,default=`Id`}"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
                         android:id="@+id/id_textoPaquete"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -67,6 +57,14 @@
                         android:text="@{viewModel.nombre,default=`Nombre`}"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Eliminar" />
 
                 </LinearLayout>
             </LinearLayout>

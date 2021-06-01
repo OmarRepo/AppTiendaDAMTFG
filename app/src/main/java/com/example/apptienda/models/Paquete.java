@@ -35,9 +35,9 @@ public class Paquete implements Parcelable
     @SerializedName("img")
     @Expose
     private String img;
-    @SerializedName("borrado")
+    @SerializedName("precio")
     @Expose
-    private String borrado;
+    private String precio;
     public final static Creator<Paquete> CREATOR = new Creator<Paquete>() {
 
 
@@ -59,7 +59,7 @@ public class Paquete implements Parcelable
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.nombre = ((String) in.readValue((String.class.getClassLoader())));
         this.img = ((String) in.readValue((String.class.getClassLoader())));
-        this.borrado = ((String) in.readValue((String.class.getClassLoader())));
+        this.precio = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
@@ -72,16 +72,16 @@ public class Paquete implements Parcelable
     /**
      * 
      * @param img
-     * @param borrado
+     * @param precio
      * @param id
      * @param nombre
      */
-    public Paquete(String id, String nombre, String img, String borrado) {
+    public Paquete(String id, String nombre, String img, String precio) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.img = img;
-        this.borrado = borrado;
+        this.precio = precio;
     }
 
     @BindingAdapter({"imagenPaquete"})
@@ -113,12 +113,12 @@ public class Paquete implements Parcelable
         this.img = img;
     }
 
-    public String getBorrado() {
-        return borrado;
+    public String getPrecio() {
+        return precio;
     }
 
-    public void setBorrado(String borrado) {
-        this.borrado = borrado;
+    public void setPrecio(String borrado) {
+        this.precio = borrado;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Paquete implements Parcelable
         sb.append(',');
         sb.append("borrado");
         sb.append('=');
-        sb.append(((this.borrado == null)?"<null>":this.borrado));
+        sb.append(((this.precio == null)?"<null>":this.precio));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -178,7 +178,7 @@ public class Paquete implements Parcelable
         result = ((result* 31)+((this.img == null)? 0 :this.img.hashCode()));
         result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
         result = ((result* 31)+((this.nombre == null)? 0 :this.nombre.hashCode()));
-        result = ((result* 31)+((this.borrado == null)? 0 :this.borrado.hashCode()));
+        result = ((result* 31)+((this.precio == null)? 0 :this.precio.hashCode()));
         return result;
     }
 
@@ -191,14 +191,14 @@ public class Paquete implements Parcelable
             return false;
         }
         Paquete rhs = ((Paquete) other);
-        return ((((Objects.equals(this.img, rhs.img))&&(Objects.equals(this.id, rhs.id)))&&(Objects.equals(this.nombre, rhs.nombre)))&&(Objects.equals(this.borrado, rhs.borrado)));
+        return ((((Objects.equals(this.img, rhs.img))&&(Objects.equals(this.id, rhs.id)))&&(Objects.equals(this.nombre, rhs.nombre)))&&(Objects.equals(this.precio, rhs.precio)));
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(nombre);
         dest.writeValue(img);
-        dest.writeValue(borrado);
+        dest.writeValue(precio);
     }
 
     public int describeContents() {

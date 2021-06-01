@@ -1,6 +1,10 @@
 package com.example.apptienda.viewmodels;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
@@ -37,11 +41,37 @@ public class LoginViewModel extends ViewModel {
                         Gson gson=new Gson();
                         Usuario usu = gson.fromJson(result.toString(),Usuario.class);
                         DataRepository.postUsuarioLogeado(usu);
+                        SharedPreferences sharedPref =App.getContext().getSharedPreferences("session",Context.MODE_PRIVATE);
+                        sharedPref.edit().putString("email",email.get()).putString("password",password.get()).apply();
                         navigateToHome();
                     }
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(App.getContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void directLogin() {
+        SharedPreferences sharedPref =App.getContext().getSharedPreferences("session",Context.MODE_PRIVATE);
+        String emailSaved=sharedPref.getString("email","vacio");
+        String passwordSaved=sharedPref.getString("password","vacio");
+        if(!emailSaved.equals("vacio")) {
+            try {
+                Usuario.LogIn(emailSaved, passwordSaved, new VolleyJSONCallback() {
+                    @Override
+                    public void onSuccessResponse(JSONObject result) {
+                        Gson gson=new Gson();
+                        Usuario usu = gson.fromJson(result.toString(),Usuario.class);
+                        DataRepository.postUsuarioLogeado(usu);
+                        navigateToHome();
+                    }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(App.getContext(), "Contraseña cambiada, vuelva a iniciar sesion", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (JSONException e) {

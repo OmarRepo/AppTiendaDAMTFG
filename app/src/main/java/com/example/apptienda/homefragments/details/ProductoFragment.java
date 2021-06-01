@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.apptienda.R;
 import com.example.apptienda.databinding.ProductoFragmentBinding;
@@ -42,8 +44,16 @@ public class ProductoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button addPaquete =getView().findViewById(R.id.carrito);
+        addPaquete.setOnClickListener(v ->{
+            if(vm.addToCart()){
+                Toast.makeText(getContext(), "Añadido con exito", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getContext(), "Paquete ya en el carrito", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
     @Override
     public void onResume() {
         super.onResume();

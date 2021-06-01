@@ -69,10 +69,11 @@ public class TiendaFragment extends Fragment {
                 return true;
             }
         });
-
         FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.FAB_carrito);
-        fab.setOnClickListener(view1 -> Snackbar.make(view1, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view1 ->{
+            NavController navController = Navigation.findNavController((Activity)rv.getContext(), R.id.nav_host_fragment);
+            navController.navigate(R.id.nav_carrito);
+        });
     }
 
     @Override

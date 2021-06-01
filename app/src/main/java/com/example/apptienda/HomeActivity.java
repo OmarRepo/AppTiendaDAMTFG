@@ -1,6 +1,10 @@
 package com.example.apptienda;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -12,6 +16,7 @@ import android.widget.Toast;
 import com.example.apptienda.databinding.ActivityHomeDrawerSideCabeceraBinding;
 import com.example.apptienda.databinding.ActivityHomeBinding;
 
+import com.example.apptienda.helpers.App;
 import com.example.apptienda.homefragments.tienda.PaqueteAdapter;
 import com.example.apptienda.viewmodels.HomeViewModel;
 import com.google.android.material.navigation.NavigationView;
@@ -107,7 +112,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (!arrived) {
            switch (item.getItemId()) {
                case R.id.action_close_sesion:
-                   Toast.makeText(this, "Cerrando sesión", Toast.LENGTH_SHORT).show();
+                   SharedPreferences sharedPref =App.getContext().getSharedPreferences("session",Context.MODE_PRIVATE);
+                   sharedPref.edit().clear().commit();
+                   startActivity(new Intent(this,LoginActivity.class));
                    break;
            }
         }

@@ -9,54 +9,119 @@
             name="viewModel"
             type="com.example.apptienda.homefragments.details.ProductoViewModel"/>
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#83CA95"
         android:orientation="vertical"
-        tools:context=".homefragments.details.ProductoFragment" >
+        tools:context=".homefragments.details.ProductoFragment">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imagePaquete"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
-            tools:src="@tools:sample/avatars" />
+            android:layout_weight="0.25"
+            android:background="#98C6A4"
+            app:imagenPaquete="@{viewModel.paquete.img}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3">
+            android:layout_weight="0.30">
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="402dp"
-                android:layout_height="99dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="0.3"
-                android:text="@{viewModel.paquete.nombre}"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/textNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="#009688"
+                android:padding="2dp"
+                android:text="@{viewModel.paquete.nombre,default=`Nombre del paquete`"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toTopOf="@+id/guidelinehproductotitulo"
+                app:layout_constraintEnd_toStartOf="@+id/guidelinevproducto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/azul_backgroudn"
+                android:padding="5dp"
+                android:text="@{viewModel.paquete.id,default=`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum sapien sed mattis gravida. Suspendisse risus odio, luctus a justo ac, rhoncus gravida magna. Suspendisse quis est ut massa imperdiet suscipit non quis ex.`}"
+                android:textAlignment="textStart"
+                app:layout_constraintBottom_toTopOf="@+id/guidelinehproducto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelinehproductotitulo" />
+
             <Button
-                android:id="@+id/button"
+                android:id="@+id/carrito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#009688"
                 android:text="@string/addCesta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelinevproducto"
+                app:layout_constraintTop_toTopOf="@+id/guidelinehproducto" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelinehproducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelinevproducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelinehproductotitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <TextView
+                android:id="@+id/textPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="#FFEB3B"
+                android:includeFontPadding="false"
+                android:padding="5dp"
+                android:text="@{viewModel.paquete.precio+`€`,default=`12 €`}"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelinevproducto"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toTopOf="@+id/guidelinehproducto" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaProductos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="0.4"
             android:scrollbars="vertical"
-            android:layout_weight="0.9"
-            app:listProducto="@{viewModel.productos}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:listProducto="@{viewModel.productos}"
             tools:listitem="@layout/producto_card_layout" />
 
     </LinearLayout>
