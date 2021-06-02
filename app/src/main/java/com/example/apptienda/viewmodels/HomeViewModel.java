@@ -11,7 +11,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<Usuario> usuario;
     public HomeViewModel() {
         super();
-        usuario=new MutableLiveData<>( DataRepository.getUsuarioLogeado());
+        usuario=DataRepository.getMutableUsuario();
     }
     public LiveData<Usuario> getUsuario() {
         return usuario;

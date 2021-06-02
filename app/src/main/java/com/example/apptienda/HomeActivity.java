@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ActivityHomeBinding binding= DataBindingUtil.setContentView(this,R.layout.activity_home);
         ActivityHomeDrawerSideCabeceraBinding headerBinding = ActivityHomeDrawerSideCabeceraBinding.bind(binding.navView.getHeaderView(0));
         headerBinding.setViewModel(vm);
+        binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
         Picasso.get().setIndicatorsEnabled(true);

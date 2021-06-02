@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.android.volley.VolleyError;
+import com.example.apptienda.R;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.Usuario;
@@ -46,16 +47,16 @@ public class RegisterViewModel extends ViewModel {
     public String validateFields1() {
         String resultado="";
         if(!Usuario.validateNombre(nombre.get())) {
-            resultado+="error:nombre\n";
+            resultado+=App.getContext().getString(R.string.toast_nombreInvalido)+"\n";
         }
         if(!Usuario.validateApellidos(appellido.get())){
-            resultado+="error:apellido\n";
+            resultado+=App.getContext().getString(R.string.toast_apellidoInvalido)+"\n";
         }
         if(!Usuario.validateTelefono(telefono.get())) {
-            resultado+="error:telefono\n";
+            resultado+=App.getContext().getString(R.string.toast_tamano_tlf)+"\n";
         }
         if(!Usuario.validateFechaNacimiento(fecha_nacimiento.get())){
-            resultado+="error:nacimiento\n";
+            resultado+=App.getContext().getString(R.string.toast_fechaInvalida)+"\n";
         }
         if(resultado.length()!=0) {
 
@@ -64,18 +65,24 @@ public class RegisterViewModel extends ViewModel {
     }
     public String validateFields2() {
         String resultado="";
-        if(resultado.length()!=0) {
-
+        if(!Usuario.validateCalle(calle.get())){
+            resultado+=App.getContext().getString(R.string.toast_calleInvalida)+"\n";
+        }
+        if(!Usuario.validateCiudad(ciudad.get())) {
+            resultado+=App.getContext().getString(R.string.toast_ciudad)+"\n";
+        }
+        if(!Usuario.validatePostal(codigoPostal.get())) {
+            resultado += App.getContext().getString(R.string.toast_tamano_postal) + "\n";
         }
         return resultado;
     }
     public String validateFields3() {
         String resultado="";
         if(!Usuario.validateEmail(email.get())) {
-            resultado+="error:email\n";
+            resultado+=App.getContext().getString(R.string.toast_formato_correo)+"\n";
         }
         if(!Usuario.validatePassword(password.get())){
-            resultado+="error:contraseña\n";
+            resultado+=App.getContext().getString(R.string.toast_formato_pass)+"\n";
         }
         if(resultado.length()!=0) {
 

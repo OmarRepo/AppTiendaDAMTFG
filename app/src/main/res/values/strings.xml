@@ -15,9 +15,15 @@
     <string name="ciudad">Ciudad</string>
     <string name="title_activity_registro2">Registro2</string>
     <string name="toast_rellenar_campos">Rellena todos los campos para continuar</string>
+    <string name="toast_nombreInvalido">Introduzca un nombre válido </string>
+    <string name="toast_apellidoInvalido">Introduzca unos apellidos válido</string>
+    <string name="toast_fechaInvalida">Introduzca una fecha válido</string>
+    <string name="toast_calleInvalida">Introduzca una calle válida</string>
+    <string name="toast_ciudad">Introduzca una ciudad válida</string>
     <string name="toast_tamano_tlf">Introduzca un número de teléfono válido(9 números)</string>
     <string name="toast_tamano_postal">Introduzca un código postal  válido(5 números)</string>
     <string name="toast_formato_correo">Introduzca un formato de correo válido(@dominio.extension)</string>
+    <string name="toast_formato_pass">Introduzca una contraseña valida</string>
     <string name="info_usuario">Información del Usuario</string>
     <string name="volver_a_Tienda">Volver a Tienda</string>
     <string name="cambiar_Datos">Cambiar Datos</string>

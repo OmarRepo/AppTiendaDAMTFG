@@ -157,10 +157,13 @@ public class Usuario implements Parcelable{
         return Patterns.PHONE.matcher(telefono).matches();
     }
     public static boolean validateCalle(String calle) {
-        return calle.length()<=55&& calle.length()>0;
+        return calle.length()<=55 && calle.length()>0;
+    }
+    public static boolean validatePostal(String postal) {
+        return postal.length()==5;
     }
     public static boolean validateCiudad(String ciudad) {
-        return ciudad.length()<=50&& ciudad.length()>0;
+        return ciudad.length()<=50 && ciudad.length()>0;
     }
     public static boolean validatePassword(String password) {
         return password.length()<17&&password.length()>7;

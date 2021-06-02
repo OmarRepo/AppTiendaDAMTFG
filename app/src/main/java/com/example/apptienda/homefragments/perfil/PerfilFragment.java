@@ -103,6 +103,7 @@ public class PerfilFragment extends Fragment {
                             public void onSuccessResponse(JSONObject result) {
                                 Gson gson = new Gson();
                                 usu=gson.fromJson(result.toString(),Usuario.class);
+                                DataRepository.setUsuarioLogeado(usu);
                             }
                             @Override
                             public void onErrorResponse(VolleyError error) {

@@ -34,4 +34,9 @@ public class DataRepository {
     public static void postPaqueteElegido(Paquete paqueteElegido) {
         DataRepository.paqueteElegido.postValue(paqueteElegido);
     }
+    public static MutableLiveData<Usuario> getMutableUsuario() {
+        return usuarioLogeado;
+    }
+
+
 }
