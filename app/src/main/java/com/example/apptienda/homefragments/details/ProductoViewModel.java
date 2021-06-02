@@ -50,14 +50,20 @@ public class ProductoViewModel extends ViewModel {
     }
 
     @BindingAdapter("listProducto")
-    public static void actualizarProductos(RecyclerView recyclerView, ArrayList<Producto> productos) {
+    public static void setProductos(RecyclerView recyclerView, ArrayList<Producto> productos) {
+        if(productos!=null) {
+            recyclerView.setAdapter(new ProductoAdapter(productos));
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    }
+
+    public void actualizarProductos() {
         try {
             DataRepository.getPaqueteElegido().getValue().obtenerProductos(new VolleyJSONArrayCallback(){
                 @Override
                 public void onSuccessResponse(JSONArray result) {
                     Gson gson = new Gson();
                     listaProductos.setValue(gson.fromJson(result.toString(),new TypeToken<ArrayList<Producto>>(){}.getType()));
-                    recyclerView.setAdapter(new ProductoAdapter(gson.fromJson(result.toString(),new TypeToken<ArrayList<Producto>>(){}.getType())));
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -68,6 +74,7 @@ public class ProductoViewModel extends ViewModel {
             e.printStackTrace();
         }
     }
+
     @BindingAdapter({"imagenPaquete"})
     public static void loadImage(ImageView imagenView, String url) {
         Picasso.get().load(url).placeholder(R.drawable.ic_launcher_background).into(imagenView);

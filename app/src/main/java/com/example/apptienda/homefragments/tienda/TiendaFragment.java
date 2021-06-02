@@ -36,6 +36,7 @@ public class TiendaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         binding = TiendaFragmentBinding.inflate(inflater,container,false);
+        binding.setLifecycleOwner(this);
         vm = new ViewModelProvider(getActivity()).get(TiendaViewModel.class);
         binding.setViewModel(vm);
         binding.executePendingBindings();
@@ -77,9 +78,15 @@ public class TiendaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        vm.actualizarPaquetes();
         RecyclerView rv=getView().findViewById(R.id.listaPaquetes);
         ((PaqueteAdapter)rv.getAdapter()).getFilter().filter("");
         SearchView buscador =getView().findViewById(R.id.busca_paquetes);
-        buscador.setQuery("", false);
+        if (buscador != null) {
+            buscador.setQuery("", false);
+            buscador.onActionViewCollapsed();
+            buscador.onActionViewExpanded();
+            buscador.clearFocus();
+        }
     }
 }

@@ -36,7 +36,8 @@ public class CarritoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = CarritoFragmentBinding.inflate(inflater,container,false);
-        vm = new ViewModelProvider(getActivity()).get(CarritoViewModel.class);
+        binding.setLifecycleOwner(this);
+        vm = new ViewModelProvider(this).get(CarritoViewModel.class);
         binding.setViewModel(vm);
         binding.executePendingBindings();
         return binding.getRoot();
@@ -47,11 +48,15 @@ public class CarritoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView rv=getView().findViewById(R.id.carritoPaquetes);
         rv.setAdapter(new CarritoAdapter(vm));
-        CarritoAdapter adapter=(CarritoAdapter) rv.getAdapter();
         FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.floatingCrearPedido);
         fab.setOnClickListener(view1 ->{
 
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        vm.actualizarPaquetes();
+    }
 }

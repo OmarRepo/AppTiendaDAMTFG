@@ -35,6 +35,7 @@ public class ProductoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         binding = ProductoFragmentBinding.inflate(inflater,container,false);
+        binding.setLifecycleOwner(this);
         vm = new ViewModelProvider(getActivity()).get(ProductoViewModel.class);
         binding.setViewModel(vm);
         binding.executePendingBindings();
@@ -57,5 +58,6 @@ public class ProductoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        vm.actualizarProductos();
     }
 }

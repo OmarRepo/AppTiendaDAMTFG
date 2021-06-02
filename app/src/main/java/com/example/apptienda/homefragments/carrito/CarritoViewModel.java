@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,20 +28,28 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class CarritoViewModel extends ViewModel {
-    static {
-        listaPaquetes = new MutableLiveData<>();
-    }
-    private static MutableLiveData<ArrayList<Paquete>> listaPaquetes;
 
+    private MutableLiveData<ArrayList<Paquete>> listaPaquetes;
+    private MutableLiveData<Double> total;
     public CarritoViewModel() {
-
+        listaPaquetes = new MutableLiveData<>();
+        total = new MutableLiveData<>();
     }
     public LiveData<ArrayList<Paquete>> getPaquetes() {
         return listaPaquetes;
     }
-
+    public LiveData<Double> getTotal() {
+        return total;
+    }
     @BindingAdapter("cartData")
-    public static void actualizarPaquetes(RecyclerView recyclerView, ArrayList<Paquete> paquetes) {
+    public static void setCartData(RecyclerView recyclerView, ArrayList<Paquete> paquetes) {
+        CarritoAdapter adapter=(CarritoAdapter) recyclerView.getAdapter();
+        if(paquetes!=null&&adapter!=null) {
+            adapter.setData(paquetes);
+            adapter.notifyDataSetChanged();
+        }
+    }
+    public void actualizarPaquetes() {
         try {
             Paquete.obtenerPaquetes(new VolleyJSONArrayCallback() {
                 @Override
@@ -51,15 +60,16 @@ public class CarritoViewModel extends ViewModel {
                     Usuario usuario = DataRepository.getUsuarioLogeado();
                     SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
                     HashSet<String> cartSet=new HashSet<>(cart.getStringSet("cart",new HashSet<String>()));
+                    Double precioTotal=0.0;
                     for (int x=0;x< arrayPaquete.size();x++){
                         if(cartSet.contains(arrayPaquete.get(x).getId())){
-                           arrayFiltrado.add(arrayPaquete.get(x));
+                            arrayFiltrado.add(arrayPaquete.get(x));
+                            String precioString=arrayPaquete.get(x).getPrecio();
+                            precioTotal+=Double.parseDouble(precioString!=null?precioString:"0.0");
                         }
                     }
+                    total.setValue(precioTotal);
                     listaPaquetes.setValue(arrayFiltrado);
-                    CarritoAdapter adapter=(CarritoAdapter) recyclerView.getAdapter();
-                    adapter.setData(arrayFiltrado);
-                    adapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -75,9 +85,7 @@ public class CarritoViewModel extends ViewModel {
         SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
         HashSet<String> cartSet=new HashSet<>(cart.getStringSet("cart",new HashSet<String>()));
         cartSet.remove(paquete.getId());
-        if(cart.edit().putStringSet("cart",cartSet).commit()){
-            Toast.makeText(App.getContext(), "Esto se ejecuta y el id del paquete es "+paquete.getId(), Toast.LENGTH_SHORT).show();
-        }
-
+        cart.edit().putStringSet("cart",cartSet).commit();
+        actualizarPaquetes();
     }
 }

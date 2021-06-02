@@ -40,7 +40,20 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:cartData="@{viewModel.paquetes}"
                 tools:listitem="@layout/paquete_card_layout_with_remove"/>
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/Total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/round_corners"
+            android:padding="8dp"
+            android:text="@{`Total: `+viewModel.total+` €`,default=`Total: 0 €`}"
+            android:textSize="24sp" />
     </FrameLayout>
 
 </layout>

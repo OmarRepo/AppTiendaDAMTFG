@@ -44,7 +44,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     @Override
     public int getItemCount() {
             return producto.size();
-        }
+    }
 
     public class ProductoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ProductoCardLayoutBinding rowBinding;

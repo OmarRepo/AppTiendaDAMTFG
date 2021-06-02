@@ -29,29 +29,23 @@ import java.util.Observable;
 
 public class TiendaViewModel extends ViewModel {
 
-    static {
-        listaPaquetes = new MutableLiveData<>();
-    }
-    private static MutableLiveData<ArrayList<Paquete>> listaPaquetes;
+    private MutableLiveData<ArrayList<Paquete>> listaPaquetes;
 
     public TiendaViewModel() {
-
+        listaPaquetes = new MutableLiveData<>();
     }
     public LiveData<ArrayList<Paquete>> getPaquetes() {
         return listaPaquetes;
     }
 
-    @BindingAdapter("listData")
-    public static void actualizarPaquetes(RecyclerView recyclerView,ArrayList<Paquete> paquetes) {
+
+    public void actualizarPaquetes() {
         try {
             Paquete.obtenerPaquetes(new VolleyJSONArrayCallback() {
                 @Override
                 public void onSuccessResponse(JSONArray result) {
                     Gson gson = new Gson();
                     listaPaquetes.setValue(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
-                    PaqueteAdapter adapter=(PaqueteAdapter) recyclerView.getAdapter();
-                    adapter.setData(gson.fromJson(result.toString(),new TypeToken<ArrayList<Paquete>>(){}.getType()));
-                    adapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -60,6 +54,14 @@ public class TiendaViewModel extends ViewModel {
             });
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+    @BindingAdapter("listData")
+    public static void setListaPaquetes(RecyclerView recyclerView,ArrayList<Paquete> paquetes) {
+        PaqueteAdapter adapter = (PaqueteAdapter) recyclerView.getAdapter();
+        if(adapter!=null && paquetes!=null) {
+            adapter.setData(paquetes);
+            adapter.notifyDataSetChanged();
         }
     }
 }
