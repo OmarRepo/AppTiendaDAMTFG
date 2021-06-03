@@ -64,8 +64,6 @@ public class RegisterFormActivity extends AppCompatActivity {
                 vm.rellenarUsuario();
                 try {
                     vm.intentarRegistro();
-                    Intent it=new Intent(App.getContext(), LoginActivity.class);
-                    App.getContext().startActivity(it);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

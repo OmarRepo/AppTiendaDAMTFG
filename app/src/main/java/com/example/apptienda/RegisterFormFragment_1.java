@@ -32,19 +32,14 @@ public class RegisterFormFragment_1 extends Fragment {
         RegisterFormFragment1FragmentBinding binding = RegisterFormFragment1FragmentBinding.inflate(inflater,container,false);
         vm = new ViewModelProvider(getActivity()).get(RegisterViewModel.class);
         binding.setViewModel(vm);
+        binding.setLifecycleOwner(this);
         binding.executePendingBindings();
         return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //vm = new ViewModelProvider(this).get(RegisterFormFragment1ViewModel.class);
-
     }
     public String validateFields() {
         return vm.validateFields1();
     }
+
     public void calendario(View view){
         EditText et=getActivity().findViewById(R.id.fecha_registro);
         showDatePickerDialog(et);
