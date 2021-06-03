@@ -1,5 +1,6 @@
 package com.example.apptienda.viewmodels;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableField;
@@ -7,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.android.volley.VolleyError;
+import com.example.apptienda.LoginActivity;
 import com.example.apptienda.R;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
@@ -18,7 +20,11 @@ import org.json.JSONObject;
 
 
 public class RegisterViewModel extends ViewModel {
-    public MutableLiveData<Usuario> registroUsuario;
+    private MutableLiveData<Usuario> registroUsuario;
+
+    public MutableLiveData<Usuario> getRegistroUsuario() {
+        return registroUsuario;
+    }
     //form1
     public ObservableField<String> nombre;
     public ObservableField<String> appellido;
@@ -33,33 +39,24 @@ public class RegisterViewModel extends ViewModel {
     public ObservableField<String> password;
 
     public RegisterViewModel() {
-        nombre = new ObservableField<>("");
-        appellido = new ObservableField<>("");
-        telefono = new ObservableField<>("");
-        fecha_nacimiento = new ObservableField<>("");
         calle = new ObservableField<>("");
-        ciudad = new ObservableField<>("");
         codigoPostal = new ObservableField<>("");
-        email = new ObservableField<>("");
         password = new ObservableField<>("");
-        registroUsuario=new MutableLiveData<>();
+        registroUsuario=new MutableLiveData<>(new Usuario());
     }
     public String validateFields1() {
         String resultado="";
-        if(!Usuario.validateNombre(nombre.get())) {
+        if(!Usuario.validateNombre(registroUsuario.getValue().getNombre())) {
             resultado+=App.getContext().getString(R.string.toast_nombreInvalido)+"\n";
         }
-        if(!Usuario.validateApellidos(appellido.get())){
+        if(!Usuario.validateApellidos(registroUsuario.getValue().getApellidos())){
             resultado+=App.getContext().getString(R.string.toast_apellidoInvalido)+"\n";
         }
-        if(!Usuario.validateTelefono(telefono.get())) {
+        if(!Usuario.validateTelefono(registroUsuario.getValue().getTelefono())) {
             resultado+=App.getContext().getString(R.string.toast_tamano_tlf)+"\n";
         }
-        if(!Usuario.validateFechaNacimiento(fecha_nacimiento.get())){
+        if(!Usuario.validateFechaNacimiento(registroUsuario.getValue().getFechaNacimiento())){
             resultado+=App.getContext().getString(R.string.toast_fechaInvalida)+"\n";
-        }
-        if(resultado.length()!=0) {
-
         }
         return resultado;
     }
@@ -68,7 +65,7 @@ public class RegisterViewModel extends ViewModel {
         if(!Usuario.validateCalle(calle.get())){
             resultado+=App.getContext().getString(R.string.toast_calleInvalida)+"\n";
         }
-        if(!Usuario.validateCiudad(ciudad.get())) {
+        if(!Usuario.validateCiudad(registroUsuario.getValue().getCiudad())) {
             resultado+=App.getContext().getString(R.string.toast_ciudad)+"\n";
         }
         if(!Usuario.validatePostal(codigoPostal.get())) {
@@ -78,40 +75,31 @@ public class RegisterViewModel extends ViewModel {
     }
     public String validateFields3() {
         String resultado="";
-        if(!Usuario.validateEmail(email.get())) {
+        if(!Usuario.validateEmail(registroUsuario.getValue().getEmail())) {
             resultado+=App.getContext().getString(R.string.toast_formato_correo)+"\n";
         }
         if(!Usuario.validatePassword(password.get())){
             resultado+=App.getContext().getString(R.string.toast_formato_pass)+"\n";
         }
-        if(resultado.length()!=0) {
-
-        }
         return resultado;
     }
     public void rellenarUsuario() {
-        Usuario usuarioNuevo=new Usuario();
-        usuarioNuevo.setNombre(nombre.get());
-        usuarioNuevo.setApellidos(appellido.get());
-        usuarioNuevo.setCiudad(ciudad.get());
-        usuarioNuevo.setEmail(email.get());
-        usuarioNuevo.setCalle(calle.get()+","+codigoPostal.get());
-        usuarioNuevo.setTelefono(telefono.get());
-        usuarioNuevo.setFechaNacimiento(fecha_nacimiento.get());
-        registroUsuario.setValue(usuarioNuevo);
+        registroUsuario.getValue().setCalle(calle.get()+","+codigoPostal.get());
     }
     public synchronized void intentarRegistro() throws JSONException {
+        Toast.makeText(App.getContext(), "Intentando registrar al usuario: "+registroUsuario.getValue().toString(), Toast.LENGTH_SHORT).show();
         registroUsuario.getValue().RegistrarUsuario(password.get(), new VolleyJSONCallback() {
             @Override
             public void onSuccessResponse(JSONObject result) {
                 Gson gson = new Gson();
                 Usuario usu = gson.fromJson(result.toString(),Usuario.class);
                 Toast.makeText(App.getContext(), "Registro de usuario: "+usu.getNombre()+"\nCompletado satisfactoriamente", Toast.LENGTH_SHORT).show();
+                Intent it=new Intent(App.getContext(), LoginActivity.class);
+                App.getContext().startActivity(it);
             }
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(App.getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }

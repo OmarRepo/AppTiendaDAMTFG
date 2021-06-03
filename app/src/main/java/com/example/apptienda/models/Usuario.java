@@ -77,7 +77,14 @@ public class Usuario implements Parcelable{
      * Constructor sin parametros para usar durante el registro
      */
     public Usuario() {
-
+        this.nombre = "";
+        this.apellidos = "";
+        this.fechaNacimiento = "";
+        this.email = "";
+        this.telefono = "";
+        this.calle = "";
+        this.ciudad = "";
+        this.Id = "";
     }
     public Usuario(Parcel in) {
         readFromParceable(in);

@@ -30,6 +30,7 @@ public class RegisterFormFragment_3 extends Fragment {
         RegisterFormFragment3FragmentBinding binding = RegisterFormFragment3FragmentBinding.inflate(inflater,container,false);
         vm = new ViewModelProvider(getActivity()).get(RegisterViewModel.class);
         binding.setViewModel(vm);
+        binding.setLifecycleOwner(this);
         binding.executePendingBindings();
         return binding.getRoot();
     }

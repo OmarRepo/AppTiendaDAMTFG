@@ -37,7 +37,7 @@
             android:maxLength="20"
             android:maxLines="1"
             android:textSize="25sp"
-            android:text="@={viewModel.nombre}"
+            android:text="@={viewModel.registroUsuario.nombre}"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             />
@@ -62,7 +62,7 @@
             android:ems="10"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:inputType="textPersonName"
-            android:text="@={viewModel.appellido}"
+            android:text="@={viewModel.registroUsuario.apellidos}"
             android:maxLength="40"
             android:maxLines="1"
             android:textSize="25sp"
@@ -89,7 +89,7 @@
             android:inputType="number"
             android:maxLength="9"
             android:maxLines="1"
-            android:text="@={viewModel.telefono}"
+            android:text="@={viewModel.registroUsuario.telefono}"
             android:textSize="25sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"/>
@@ -118,7 +118,7 @@
             android:focusable="false"
             android:inputType="date"
             android:onClick="calendario"
-            android:text="@={viewModel.fecha_nacimiento}"
+            android:text="@={viewModel.registroUsuario.fechaNacimiento}"
             android:textSize="25sp" />
     </LinearLayout>
 </layout>

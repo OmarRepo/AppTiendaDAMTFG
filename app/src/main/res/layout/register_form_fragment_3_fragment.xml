@@ -36,7 +36,7 @@
             android:maxLength="50"
             android:maxLines="1"
             android:textSize="25sp"
-            android:text="@={viewModel.email}"
+            android:text="@={viewModel.registroUsuario.email}"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             />

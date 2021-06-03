@@ -29,7 +29,9 @@ public class RegisterFormFragment_2 extends Fragment {
         RegisterFormFragment2FragmentBinding binding = RegisterFormFragment2FragmentBinding.inflate(inflater,container,false);
         vm = new ViewModelProvider(getActivity()).get(RegisterViewModel.class);
         binding.setViewModel(vm);
+        binding.setLifecycleOwner(this);
         binding.executePendingBindings();
+
         return binding.getRoot();
     }
     public String validateFields() {
