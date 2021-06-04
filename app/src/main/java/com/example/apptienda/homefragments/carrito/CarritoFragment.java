@@ -25,6 +25,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.ExecutionException;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class CarritoFragment extends Fragment {
     private CarritoViewModel vm;
     private CarritoFragmentBinding binding;
@@ -48,9 +52,32 @@ public class CarritoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView rv=getView().findViewById(R.id.carritoPaquetes);
         rv.setAdapter(new CarritoAdapter(vm));
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.floatingCrearPedido);
-        fab.setOnClickListener(view1 ->{
-
+        FloatingActionButton fab = getView().findViewById(R.id.floatingCrearPedido);
+        fab.setOnClickListener(view1 -> {
+            if (vm.getPaquetes().getValue().size() > 0) {
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Confirmar pedido")
+                        .setContentText("Estas seguro de que quieres comprar?")
+                        .setConfirmText("Dale!")
+                        .setConfirmClickListener(sweetAlertDialog -> {
+                            try {
+                                vm.confirmarPedido();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        })
+                        .setCancelButton("No ", sDialog -> sDialog.dismissWithAnimation())
+                        .show();
+            } else {
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Carrito vacio")
+                        .setContentText("El carrito esta vacio D.D ?")
+                        .setConfirmText("Cierto")
+                        .setConfirmClickListener(sweetAlertDialog ->sweetAlertDialog.dismissWithAnimation())
+                        .show();
+            }
         });
     }
 

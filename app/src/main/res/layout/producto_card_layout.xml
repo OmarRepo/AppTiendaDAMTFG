@@ -56,7 +56,6 @@
                         android:layout_weight="1"
                         android:text="@{viewModel.id,default=`Id`}"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
-
                     <TextView
                         android:id="@+id/id_textoPaquete"
                         android:layout_width="match_parent"

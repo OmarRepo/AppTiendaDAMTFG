@@ -8,6 +8,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.apptienda.helpers.App;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.helpers.CustomJsonArrayRequest;
 import com.example.apptienda.helpers.SingletonRequestQueue;
 import com.google.gson.Gson;
@@ -26,10 +28,12 @@ import java.util.concurrent.ExecutionException;
 
 public class Pedido implements Parcelable
 {
-
-    @SerializedName("id")
+    @SerializedName("id_usuario")
     @Expose
-    private String id;
+    private String idUsuario;
+    @SerializedName("id_pedido")
+    @Expose
+    private String idPedido;
     @SerializedName("fecha_creacion")
     @Expose
     private String fechaCreacion;
@@ -67,7 +71,8 @@ public class Pedido implements Parcelable
     ;
 
     protected Pedido(android.os.Parcel in) {
-        this.id = ((String) in.readValue((String.class.getClassLoader())));
+        this.idUsuario = ((String) in.readValue((String.class.getClassLoader())));
+        this.idPedido = ((String) in.readValue((String.class.getClassLoader())));
         this.fechaCreacion = ((String) in.readValue((String.class.getClassLoader())));
         this.precioTotal = ((String) in.readValue((String.class.getClassLoader())));
         this.borrado = ((String) in.readValue((String.class.getClassLoader())));
@@ -83,18 +88,10 @@ public class Pedido implements Parcelable
     public Pedido() {
     }
 
-    /**
-     * 
-     * @param borrado
-     * @param fechaCreacion
-     * @param enviado
-     * @param id
-     * @param recibido
-     * @param precioTotal
-     */
-    public Pedido(String id, String fechaCreacion, String precioTotal, String borrado, String enviado, String recibido) {
+    public Pedido(String idUsuario,String idPedido, String fechaCreacion, String precioTotal, String borrado, String enviado, String recibido) {
         super();
-        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idPedido = idPedido;
         this.fechaCreacion = fechaCreacion;
         this.precioTotal = precioTotal;
         this.borrado = borrado;
@@ -102,14 +99,21 @@ public class Pedido implements Parcelable
         this.recibido = recibido;
     }
 
-    public String getId() {
-        return id;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
+    public String getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(String idPedido) {
+        this.idPedido = idPedido;
+    }
     public String getFechaCreacion() {
         return fechaCreacion;
     }
@@ -153,64 +157,39 @@ public class Pedido implements Parcelable
     public ArrayList<Paquete> getPaquetes () {return paquetes; }
 
     public void setPaquetes(ArrayList<Paquete> paquetes) {this.paquetes=paquetes; }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Pedido.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("id");
-        sb.append('=');
-        sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("fechaCreacion");
-        sb.append('=');
-        sb.append(((this.fechaCreacion == null)?"<null>":this.fechaCreacion));
-        sb.append(',');
-        sb.append("precioTotal");
-        sb.append('=');
-        sb.append(((this.precioTotal == null)?"<null>":this.precioTotal));
-        sb.append(',');
-        sb.append("borrado");
-        sb.append('=');
-        sb.append(((this.borrado == null)?"<null>":this.borrado));
-        sb.append(',');
-        sb.append("enviado");
-        sb.append('=');
-        sb.append(((this.enviado == null)?"<null>":this.enviado));
-        sb.append(',');
-        sb.append("recibido");
-        sb.append('=');
-        sb.append(((this.recibido == null)?"<null>":this.recibido));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return "Pedido{" +
+                "idUsuario='" + idUsuario + '\'' +
+                ", idPedido='" + idPedido + '\'' +
+                ", fechaCreacion='" + fechaCreacion + '\'' +
+                ", precioTotal='" + precioTotal + '\'' +
+                ", borrado='" + borrado + '\'' +
+                ", enviado='" + enviado + '\'' +
+                ", recibido='" + recibido + '\'' +
+                '}';
     }
-    public static List<Pedido> obtenerPedidos() throws ExecutionException, InterruptedException {
+
+    public static void obtenerPedidos(final VolleyJSONArrayCallback callback) throws ExecutionException, InterruptedException {
         CompletableFuture<ArrayList<Pedido>> future = new CompletableFuture<>();
         try {
             Gson gson=new Gson();
             JSONObject objetoPeticion = new JSONObject();
-            objetoPeticion.put("action",DataRepository.getUsuarioLogeado().getId());
+            objetoPeticion.put("id",DataRepository.getUsuarioLogeado().getId());
             objetoPeticion.put("action", "list_orders");
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
-                    response -> {
-                        ArrayList<Pedido> pedidos = gson.fromJson(response.toString(),new TypeToken<ArrayList<Pedido>>(){}.getType());
-                        future.complete(pedidos);
-                    }
+                    callback::onSuccessResponse
                     ,
-                    error -> future.completeExceptionally(new RemoteException()));
+                    callback::onErrorResponse);
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return future.get();
     }
-    public boolean crearPedido() throws ExecutionException, InterruptedException {
+    public void crearPedido(final VolleyJSONCallback callback) throws ExecutionException, InterruptedException {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
         try {
             Gson gson=new Gson();
@@ -220,44 +199,38 @@ public class Pedido implements Parcelable
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, objetoPeticion,
-                    response -> {
-                        gson.fromJson(response.toString(),Pedido.class);
-                        future.complete(true);
-                    }
+                    callback::onSuccessResponse
                     ,
-                    error -> future.complete(false));
+                    callback::onErrorResponse);
             queue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return future.get().booleanValue();
-    }
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.borrado == null)? 0 :this.borrado.hashCode()));
-        result = ((result* 31)+((this.fechaCreacion == null)? 0 :this.fechaCreacion.hashCode()));
-        result = ((result* 31)+((this.enviado == null)? 0 :this.enviado.hashCode()));
-        result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
-        result = ((result* 31)+((this.recibido == null)? 0 :this.recibido.hashCode()));
-        result = ((result* 31)+((this.precioTotal == null)? 0 :this.precioTotal.hashCode()));
-        return result;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Pedido) == false) {
-            return false;
-        }
-        Pedido rhs = ((Pedido) other);
-        return ((((((Objects.equals(this.borrado, rhs.borrado))&&(Objects.equals(this.fechaCreacion, rhs.fechaCreacion)))&&(Objects.equals(this.enviado, rhs.enviado)))&&(Objects.equals(this.id, rhs.id)))&&(Objects.equals(this.recibido, rhs.recibido)))&&(Objects.equals(this.precioTotal, rhs.precioTotal)));
+    public int hashCode() {
+        return Objects.hash(idUsuario, idPedido, fechaCreacion, precioTotal, borrado, enviado, recibido, paquetes);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(idUsuario, pedido.idUsuario) &&
+                Objects.equals(idPedido, pedido.idPedido) &&
+                Objects.equals(fechaCreacion, pedido.fechaCreacion) &&
+                Objects.equals(precioTotal, pedido.precioTotal) &&
+                Objects.equals(borrado, pedido.borrado) &&
+                Objects.equals(enviado, pedido.enviado) &&
+                Objects.equals(recibido, pedido.recibido) &&
+                Objects.equals(paquetes, pedido.paquetes);
     }
 
     public void writeToParcel(android.os.Parcel dest, int flags) {
-        dest.writeValue(id);
+        dest.writeValue(idUsuario);
+        dest.writeValue(idPedido);
         dest.writeValue(fechaCreacion);
         dest.writeValue(precioTotal);
         dest.writeValue(borrado);

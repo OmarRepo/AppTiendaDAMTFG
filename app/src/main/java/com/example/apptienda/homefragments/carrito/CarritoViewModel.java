@@ -15,17 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.VolleyError;
 import com.example.apptienda.helpers.App;
 import com.example.apptienda.helpers.Callbacks.VolleyJSONArrayCallback;
+import com.example.apptienda.helpers.Callbacks.VolleyJSONCallback;
 import com.example.apptienda.models.DataRepository;
 import com.example.apptienda.models.Paquete;
+import com.example.apptienda.models.Pedido;
 import com.example.apptienda.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.concurrent.ExecutionException;
 
 public class CarritoViewModel extends ViewModel {
 
@@ -87,5 +92,23 @@ public class CarritoViewModel extends ViewModel {
         cartSet.remove(paquete.getId());
         cart.edit().putStringSet("cart",cartSet).commit();
         actualizarPaquetes();
+    }
+
+    public void confirmarPedido() throws ExecutionException, InterruptedException {
+        Pedido pedido=new Pedido();
+        pedido.setPaquetes(listaPaquetes.getValue());
+        pedido.setPrecioTotal(total.getValue().toString());
+        pedido.setIdUsuario(DataRepository.getMutableUsuario().getValue().getId());
+        pedido.crearPedido(new VolleyJSONCallback() {
+            @Override
+            public void onSuccessResponse(JSONObject result) {
+                Toast.makeText(App.getContext(), result.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getContext(), "Pedido creado", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(App.getContext(), "Error al crear el pedido", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
