@@ -66,7 +66,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
-                    android:text="@{entusiasmado.recibido ?`Recibido`:`Sin recibir`,default=`Recibio`}"
+                    android:text="@{entusiasmado.recibido.equals(`0`)?`Recibido`:`Sin recibir`,default=`Recibio`}"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
                 <TextView
                     android:id="@+id/estadoPedidoEnviado"
@@ -75,7 +75,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
-                    android:text="@{entusiasmado.enviado?`Enviado`:`Sin enviar`,default=`Enviado`}"
+                    android:text="@{entusiasmado.enviado.equals(`0`)?`Enviado`:`Sin enviar`,default=`Enviado`}"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>

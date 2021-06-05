@@ -17,7 +17,7 @@
         android:layout_weight="0.4"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:listPedidos="@{lista.}"
+        app:listPedido="@{lista.pedidos}"
         tools:listitem="@layout/pedido_card_layout" />
     </LinearLayout>
 </layout>

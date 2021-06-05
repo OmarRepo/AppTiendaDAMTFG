@@ -25,12 +25,12 @@ import java.util.concurrent.ExecutionException;
 
 public class PedidosViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<Paquete>> listaPedidos;
+    private MutableLiveData<ArrayList<Pedido>> listaPedidos;
 
     public PedidosViewModel() {
         listaPedidos = new MutableLiveData<>();
     }
-    public LiveData<ArrayList<Paquete>> getPaquetes() {
+    public LiveData<ArrayList<Pedido>> getPedidos() {
         return listaPedidos;
     }
 
