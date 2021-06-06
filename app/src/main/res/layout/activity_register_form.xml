@@ -7,16 +7,27 @@
     android:orientation="vertical"
     tools:context=".RegisterFormActivity">
 
-    <FrameLayout
-        android:id="@+id/formFragmentContainer"
+
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/limit09"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/formFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/limit09"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </FrameLayout>
+    </ScrollView>
 
     <ImageButton
         android:id="@+id/siguiente1"
@@ -30,7 +41,6 @@
         app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/limit09"
-        app:layout_constraintVertical_bias="0.619"
         tools:src="@drawable/ic_arrow_forward_ios" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -39,4 +49,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

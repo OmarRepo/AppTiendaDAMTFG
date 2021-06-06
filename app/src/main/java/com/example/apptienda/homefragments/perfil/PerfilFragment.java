@@ -38,14 +38,6 @@ public class PerfilFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
         View root = inflater.inflate(R.layout.perfil_fragment, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
-
 
         return root;
     }

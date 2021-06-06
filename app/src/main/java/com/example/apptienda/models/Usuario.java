@@ -190,8 +190,7 @@ public class Usuario implements Parcelable{
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(telefono, usuario.telefono) &&
                 Objects.equals(calle, usuario.calle) &&
-                Objects.equals(ciudad, usuario.ciudad) &&
-                Objects.equals(Id,usuario.getId());
+                Objects.equals(ciudad, usuario.ciudad);
     }
 
     @Override
