@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.viewmodels.RegisterViewModel" />
+            type="com.example.buyaskill.viewmodels.RegisterViewModel" />
     </data>
     <LinearLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.viewmodels.LoginViewModel" />
+            type="com.example.buyaskill.viewmodels.LoginViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:text="@={viewModel.email}"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:textColor="@color/azul_letra" />
+                    android:textColor="@color/boton_background_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +60,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:text="@={viewModel.password}"
-                    android:textColor="@color/azul_letra" />
+                    android:textColor="@color/boton_background_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -77,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/boton_background_color"
                     android:enabled="@{viewModel.actionsEnabled}"
                     android:onClick="login"
                     android:text="@string/acceder" />
@@ -87,9 +88,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/boton_background_color"
                     android:enabled="@{viewModel.actionsEnabled}"
-                    android:text="@string/registrar"
-                    android:onClick="registrarse"/>
+                    android:onClick="registrarse"
+                    android:text="@string/registrar" />
             </LinearLayout>
 
 

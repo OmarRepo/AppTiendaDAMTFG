@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azul_letra">#3258a8</color>
-    <color name="azul_backgroudn">#77c7b9</color>
+    <color name="card_background_color">#77c7b9</color>
     <color name="un">#3258a8</color>
     <color name="ds">#3258a8</color>
-
+    <color name="background_color">#83CA95</color>
+    <color name="boton_background_color">#009688</color>
 
 </resources>

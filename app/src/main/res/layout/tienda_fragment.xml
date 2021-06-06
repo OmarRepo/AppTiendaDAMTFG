@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.homefragments.tienda.TiendaViewModel"/>
+            type="com.example.buyaskill.homefragments.tienda.TiendaViewModel"/>
     </data>
 
     <FrameLayout
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:backgroundTint="#C3D3E1"
+            android:backgroundTint="@color/boton_background_color"
             android:clickable="true"
             app:srcCompat="@android:drawable/star_big_on"
             app:useCompatPadding="true" />
@@ -26,11 +26,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#83CA95"
+            android:background="@color/background_color"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
             tools:context=".HomeActivity">
 
             <SearchView

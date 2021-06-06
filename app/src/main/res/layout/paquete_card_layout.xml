@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.models.Paquete" />
+            type="com.example.buyaskill.models.Paquete" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:id="@+id/id_paqueteView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/azul_backgroudn"
+        app:cardBackgroundColor="@color/card_background_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">

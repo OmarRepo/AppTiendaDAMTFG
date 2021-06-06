@@ -6,10 +6,10 @@
     <data>
         <variable
             name="paquete"
-            type="com.example.apptienda.models.Paquete" />
+            type="com.example.buyaskill.models.Paquete" />
         <variable
             name="lista"
-            type="com.example.apptienda.homefragments.carrito.CarritoViewModel"/>
+            type="com.example.buyaskill.homefragments.carrito.CarritoViewModel"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:id="@+id/id_paqueteView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/azul_backgroudn"
+            app:cardBackgroundColor="@color/card_background_color"
             card_view:cardCornerRadius="10dp"
             card_view:cardElevation="5dp"
             card_view:cardUseCompatPadding="true">
@@ -66,6 +66,7 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/boton_background_color"
                         android:onClick="@{() -> lista.removeFromCart(paquete)}"
                         android:text="Eliminar" />
                 </LinearLayout>

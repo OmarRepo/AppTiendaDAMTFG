@@ -7,15 +7,15 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.homefragments.details.ProductoViewModel"/>
+            type="com.example.buyaskill.homefragments.paquete_details.ProductoViewModel"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#83CA95"
+        android:background="@color/background_color"
         android:orientation="vertical"
-        tools:context=".homefragments.details.ProductoFragment">
+        tools:context=".homefragments.paquete_details.ProductoFragment">
 
         <ImageView
             android:id="@+id/imagePaquete"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/round_corners"
-                android:backgroundTint="#009688"
+                android:backgroundTint="@color/boton_background_color"
                 android:padding="2dp"
                 android:text="@{viewModel.paquete.nombre,default=`Nombre del paquete`}"
                 android:textAlignment="center"
@@ -55,7 +55,7 @@
                 android:layout_margin="16dp"
                 android:layout_weight="0.3"
                 android:background="@drawable/round_corners"
-                android:backgroundTint="@color/azul_backgroudn"
+                android:backgroundTint="@color/background_color"
                 android:padding="5dp"
                 android:text="@{viewModel.paquete.id,default=`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum sapien sed mattis gravida. Suspendisse risus odio, luctus a justo ac, rhoncus gravida magna. Suspendisse quis est ut massa imperdiet suscipit non quis ex.`}"
                 android:textAlignment="textStart"
@@ -69,7 +69,7 @@
                 android:id="@+id/carrito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#009688"
+                android:backgroundTint="@color/boton_background_color"
                 android:text="@string/addCesta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_corners"
-                android:backgroundTint="#FFEB3B"
+                android:backgroundTint="@color/card_background_color"
                 android:includeFontPadding="false"
                 android:padding="5dp"
                 android:text="@{viewModel.paquete.precio+`€`,default=`12 €`}"

@@ -10,9 +10,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Tienda" />
         <item
-            android:id="@+id/nav_perfil"
-            android:title="@string/perfilUsuario" />
-        <item
             android:id="@+id/nav_pedidos"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="pedidos" />

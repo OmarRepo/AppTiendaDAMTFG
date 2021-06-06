@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -17,13 +18,14 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/boton_background_color"
                 android:theme="@style/Theme.AppTienda.AppBarOverlay">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
+                    android:background="@color/boton_background_color"
                     app:popupTheme="@style/Theme.AppTienda.PopupOverlay" />
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -31,8 +33,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                >
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <fragment
                     android:id="@+id/nav_host_fragment"
@@ -54,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:background="@color/card_background_color"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/activity_home_drawer_side_cabecera"
             app:menu="@menu/activity_home_drawer_side_menu" />

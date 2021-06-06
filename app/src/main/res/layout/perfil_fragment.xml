@@ -3,19 +3,25 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".homefragments.perfil.PerfilFragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:background="@color/background_color"
+    tools:context=".homefragments.perfil.PerfilFragment">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="32dp"
+        android:padding="12dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtNombre"
@@ -44,7 +50,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtApellido"
@@ -71,7 +80,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtDir"
@@ -97,7 +109,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtCiudad"
@@ -123,7 +138,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtFecha"
@@ -150,7 +168,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtTLF"
@@ -178,7 +199,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtMail"
@@ -205,7 +229,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/card_background_color"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/txtPostal"

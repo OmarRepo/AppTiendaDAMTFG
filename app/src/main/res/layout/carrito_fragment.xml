@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.apptienda.homefragments.carrito.CarritoViewModel"/>
+            type="com.example.buyaskill.homefragments.carrito.CarritoViewModel"/>
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,12 +20,13 @@
             android:layout_gravity="bottom|end"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_upload"
+            app:backgroundTint="@color/boton_background_color"
             app:useCompatPadding="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#83CA95"
+            android:background="@color/background_color"
             android:orientation="vertical"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -51,6 +52,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/round_corners"
+            android:backgroundTint="@color/boton_background_color"
             android:padding="8dp"
             android:text="@{`Total: `+viewModel.total+` €`,default=`Total: 0 €`}"
             android:textSize="24sp" />

@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_tienda"
-        android:name="com.example.apptienda.homefragments.tienda.TiendaFragment"
+        android:name="com.example.buyaskill.homefragments.tienda.TiendaFragment"
         android:label="Tienda"
         tools:layout="@layout/tienda_fragment" />
 
     <fragment
         android:id="@+id/nav_perfil"
-        android:name="com.example.apptienda.homefragments.perfil.PerfilFragment"
+        android:name="com.example.buyaskill.homefragments.perfil.PerfilFragment"
         android:label="@string/perfilUsuario"
         tools:layout="@layout/perfil_fragment" >
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/nav_pedidos"
-        android:name="com.example.apptienda.homefragments.pedidos.PedidosFragment"
+        android:name="com.example.buyaskill.homefragments.pedidos.PedidosFragment"
         android:label="Pedidos"
         tools:layout="@layout/pedidos_fragment" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_details"
-        android:name="com.example.apptienda.homefragments.details.ProductoFragment"
+        android:name="com.example.buyaskill.homefragments.paquete_details.ProductoFragment"
         android:label="detail"
         tools:layout="@layout/producto_fragment" >
         <action
@@ -41,12 +41,21 @@
     </fragment>
     <fragment
         android:id="@+id/nav_carrito"
-        android:name="com.example.apptienda.homefragments.carrito.CarritoFragment"
+        android:name="com.example.buyaskill.homefragments.carrito.CarritoFragment"
         android:label="carrito"
         tools:layout="@layout/carrito_fragment" >
         <action
             android:id="@+id/action_nav_details_to_nav_tienda"
             app:popUpTo="@id/nav_tienda" />
     </fragment>
+    <fragment
+    android:id="@+id/nav_pedido_details"
+    android:name="com.example.buyaskill.homefragments.pedido_details.PedidoDetailFragment"
+    android:label="carrito"
+    tools:layout="@layout/pedido_detail_fragment" >
+    <action
+        android:id="@+id/action_nav_details_to_nav_tienda"
+        app:popUpTo="@id/nav_pedidos" />
+</fragment>
 
 </navigation>

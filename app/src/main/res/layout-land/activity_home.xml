@@ -23,7 +23,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
-                    android:background="?attr/colorPrimary"
+                    android:background="@color/boton_background_color"
                     app:popupTheme="@style/Theme.AppTienda.PopupOverlay" />
 
             </com.google.android.material.appbar.AppBarLayout>

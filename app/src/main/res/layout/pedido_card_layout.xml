@@ -5,8 +5,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="entusiasmado"
-            type="com.example.apptienda.models.Pedido" />
+            name="viewModel"
+            type="com.example.buyaskill.models.Pedido" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -15,24 +15,23 @@
     android:tag="cards main container">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/id_paqueteView"
+        android:id="@+id/id_pedidoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/azul_backgroudn"
+        app:cardBackgroundColor="@color/card_background_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="fill_vertical"
             android:orientation="horizontal">
 
 
-
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_marginTop="8dp"
@@ -45,8 +44,8 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@{entusiasmado.fechaCreacion ,default=`00000000`}"
+                    android:layout_weight="0.25"
+                    android:text="@{viewModel.fechaCreacion ,default=`00000000`}"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -55,27 +54,29 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:text="@{entusiasmado.precioTotal ,default=`0.00`}"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:layout_weight="0.25"
+                    android:text="@{viewModel.precioTotal ,default=`0.00`}"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black" />
+
                 <TextView
                     android:id="@+id/estadoPedidoRecibidp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:text="@{entusiasmado.recibido.equals(`0`)?`Recibido`:`Sin recibir`,default=`Recibio`}"
+                    android:layout_weight="0.25"
+                    android:text="@{viewModel.recibido.equals('0')?`Recibido`:`Sin recibir`,default=`Recibio`}"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
+
                 <TextView
                     android:id="@+id/estadoPedidoEnviado"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:text="@{entusiasmado.enviado.equals(`0`)?`Enviado`:`Sin enviar`,default=`Enviado`}"
+                    android:layout_weight="0.25"
+                    android:text="@{viewModel.enviado.equals('0')?`Enviado`:`Sin enviar`,default=`Enviado`}"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>
