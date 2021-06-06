@@ -26,7 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="fill_vertical"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
@@ -45,8 +45,9 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:layout_weight="0.25"
-                    android:text="@{viewModel.fechaCreacion ,default=`00000000`}"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:text="@{viewModel.fechaCreacion,default=`00000000`}"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/precioPedido"
@@ -55,7 +56,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_weight="0.25"
-                    android:text="@{viewModel.precioTotal ,default=`0.00`}"
+                    android:text="@{viewModel.precioTotal+` €`,default=`0.00 €`}"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/black" />
 
@@ -66,8 +67,10 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_weight="0.25"
-                    android:text="@{viewModel.recibido.equals('0')?`Recibido`:`Sin recibir`,default=`Recibio`}"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:elegantTextHeight="false"
+                    android:text="@{@string/pedidoConcat(viewModel.recibido.equals(`1`)?`recibido`:`sin recibir`),default=`recibido`}"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/estadoPedidoEnviado"
@@ -76,8 +79,10 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_weight="0.25"
-                    android:text="@{viewModel.enviado.equals('0')?`Enviado`:`Sin enviar`,default=`Enviado`}"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:elegantTextHeight="false"
+                    android:text="@{@string/pedidoConcat(viewModel.enviado.equals(`1`)?`enviado`:`sin enviar`),default=`enviado`}"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </LinearLayout>

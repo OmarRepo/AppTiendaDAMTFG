@@ -31,7 +31,6 @@ public class TiendaViewModel extends ViewModel {
         return listaPaquetes;
     }
 
-
     public void actualizarPaquetes() {
         try {
             Paquete.obtenerPaquetes(new VolleyJSONArrayCallback() {

@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/nav_details"
         android:name="com.example.buyaskill.homefragments.paquete_details.ProductoFragment"
-        android:label="detail"
+        android:label="Detalles paquete"
         tools:layout="@layout/producto_fragment" >
         <action
             android:id="@+id/action_nav_details_to_nav_tienda"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/nav_carrito"
         android:name="com.example.buyaskill.homefragments.carrito.CarritoFragment"
-        android:label="carrito"
+        android:label="Carrito"
         tools:layout="@layout/carrito_fragment" >
         <action
             android:id="@+id/action_nav_details_to_nav_tienda"
@@ -51,7 +51,7 @@
     <fragment
     android:id="@+id/nav_pedido_details"
     android:name="com.example.buyaskill.homefragments.pedido_details.PedidoDetailFragment"
-    android:label="carrito"
+    android:label="Detalles pedido"
     tools:layout="@layout/pedido_detail_fragment" >
     <action
         android:id="@+id/action_nav_details_to_nav_tienda"

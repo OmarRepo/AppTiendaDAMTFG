@@ -18,7 +18,7 @@
         <activity android:name="com.example.buyaskill.RegisterFormActivity" />
         <activity
             android:name="com.example.buyaskill.HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="home"
             android:theme="@style/Theme.AppTienda.NoActionBar" />
         <activity android:name="com.example.buyaskill.LoginActivity">
             <intent-filter>

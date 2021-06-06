@@ -2,6 +2,7 @@
 package com.example.buyaskill.models;
 
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -186,8 +187,25 @@ public class Pedido implements Parcelable
             e.printStackTrace();
         }
     }
-    public void crearPedido(final VolleyJSONCallback callback) throws ExecutionException, InterruptedException {
-        CompletableFuture<Boolean> future = new CompletableFuture<>();
+    public void getPaquetesPedido(final VolleyJSONArrayCallback callback) {
+        try {
+            Gson gson=new Gson();
+            JSONObject objetoPeticion = new JSONObject();
+            objetoPeticion.put("id",this.idPedido);
+            objetoPeticion.put("action", "order_packs");
+            String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
+            Log.i("175",objetoPeticion.toString()+this.idPedido);
+            RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
+            CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
+                    callback::onSuccessResponse
+                    ,
+                    callback::onErrorResponse);
+            queue.add(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void crearPedido(final VolleyJSONCallback callback) {
         try {
             Gson gson=new Gson();
             JSONObject objetoPeticion = new JSONObject();

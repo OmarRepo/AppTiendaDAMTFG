@@ -11,16 +11,16 @@
             name="lista"
             type="com.example.buyaskill.homefragments.carrito.CarritoViewModel"/>
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/id_paqueteView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/card_background_color"
             card_view:cardCornerRadius="10dp"
             card_view:cardElevation="5dp"
@@ -28,8 +28,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="fill_vertical"
+                android:layout_height="125dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -50,22 +50,29 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/id_textoPaquete2"
+                        android:id="@+id/nombre_textoPaquete"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1"
+                        android:layout_weight="0.3"
                         android:text="@{paquete.nombre,default=`Nombre`}"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/precio_textoPaquete"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.3"
+                        android:text="@{paquete.precio+` €`,default=`12.00 €`}" />
 
                     <Button
                         android:id="@+id/button"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:layout_weight="0.5"
                         android:backgroundTint="@color/boton_background_color"
                         android:onClick="@{() -> lista.removeFromCart(paquete)}"
                         android:text="Eliminar" />

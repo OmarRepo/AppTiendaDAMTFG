@@ -8,15 +8,18 @@
         <item
             android:id="@+id/nav_tienda"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Tienda" />
+            android:title="Tienda"
+            android:iconTint="@color/boton_background_color"/>
         <item
             android:id="@+id/nav_pedidos"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="pedidos" />
+            android:title="pedidos"
+            android:iconTint="@color/boton_background_color"/>
         <item
             android:id="@+id/action_close_sesion"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="cerrar sesion"
+            android:iconTint="@color/boton_background_color"
             />
     </group>
 </menu>

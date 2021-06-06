@@ -29,14 +29,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class ProductoViewModel extends ViewModel {
-    static {
-        listaProductos = new MutableLiveData<>();
-    }
+
     private static MutableLiveData<ArrayList<Producto>> listaProductos;
     private static MutableLiveData<Paquete> paqueteElegido;
 
     public ProductoViewModel() {
         paqueteElegido=DataRepository.getPaqueteElegido();
+        listaProductos=new MutableLiveData<>();
     }
 
     public static MutableLiveData<ArrayList<Producto>> getProductos() {

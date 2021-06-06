@@ -43,4 +43,8 @@ public class DataRepository {
     public static void setPedidoElegido(Pedido pedidoElegido) {
         DataRepository.pedidoElegido.setValue(pedidoElegido);
     }
+
+    public static MutableLiveData<Pedido> getPedidoElegido() {
+        return DataRepository.pedidoElegido;
+    }
 }
