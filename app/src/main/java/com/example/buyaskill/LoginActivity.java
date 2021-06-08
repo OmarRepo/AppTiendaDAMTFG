@@ -21,10 +21,10 @@ public class LoginActivity extends AppCompatActivity {
     LoginViewModel vm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         vm=new ViewModelProvider(this).get(LoginViewModel.class);
         vm.directLogin();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         binding.setViewModel(vm);
         binding.executePendingBindings();

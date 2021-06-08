@@ -1,6 +1,8 @@
 package com.example.buyaskill.homefragments.perfil;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +98,8 @@ public class PerfilFragment extends Fragment {
                                 Gson gson = new Gson();
                                 usu=gson.fromJson(result.toString(),Usuario.class);
                                 DataRepository.setUsuarioLogeado(usu);
+                                SharedPreferences sharedPref =App.getContext().getSharedPreferences("session", Context.MODE_PRIVATE);
+                                sharedPref.edit().putString("email",usu.getEmail()).apply();
                             }
                             @Override
                             public void onErrorResponse(VolleyError error) {
