@@ -31,7 +31,7 @@ public class RegisterFormActivity extends AppCompatActivity {
         form3=new RegisterFormFragment_3();
         transaction.add(R.id.formFragmentContainer,form1).commit();
     }
-
+    //Metodo que controla el paso de un fragmento del registro a otro
     public void next(View view) {
         currentForm=getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size()-1);
         transaction=getSupportFragmentManager().beginTransaction();
@@ -72,6 +72,7 @@ public class RegisterFormActivity extends AppCompatActivity {
         }
         transaction.commit();
     }
+    //Metodo que muestra el calendario para el pop up
     public void calendario(View view) {
         form1.calendario(view);
     }

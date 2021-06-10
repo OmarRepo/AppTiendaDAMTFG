@@ -20,6 +20,7 @@ import static com.example.buyaskill.helpers.App.getContext;
 public class LoginActivity extends AppCompatActivity {
     LoginViewModel vm;
     @Override
+    //creamos los elementos a usar para el login, usando Piccaso para cargar las imagenes deseadas
     protected void onCreate(Bundle savedInstanceState) {
         vm=new ViewModelProvider(this).get(LoginViewModel.class);
         vm.directLogin();

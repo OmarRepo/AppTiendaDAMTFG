@@ -34,7 +34,7 @@ public class RegisterFormFragment_3 extends Fragment {
         binding.executePendingBindings();
         return binding.getRoot();
     }
-
+    //Metodo que llama a la validacion de los distintos campos del formulario
     public String validateFields() {
         return vm.validateFields3();
     }

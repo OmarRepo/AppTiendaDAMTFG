@@ -36,14 +36,17 @@ public class RegisterFormFragment_1 extends Fragment {
         binding.executePendingBindings();
         return binding.getRoot();
     }
+    //Metodo que llama a la validacion de los distintos campos del formulario
     public String validateFields() {
         return vm.validateFields1();
     }
 
+    //metodo que llama a la creacion del popup con el calendario
     public void calendario(View view){
         EditText et=getActivity().findViewById(R.id.fecha_registro);
         showDatePickerDialog(et);
     }
+    //creador del calendario como pop up de la fecha
     private void showDatePickerDialog(EditText et) {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
