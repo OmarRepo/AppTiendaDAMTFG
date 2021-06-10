@@ -50,27 +50,30 @@ public class CarritoFragment extends Fragment {
         FloatingActionButton fab = getView().findViewById(R.id.floatingCrearPedido);
         fab.setOnClickListener(view1 -> {
             if (vm.getPaquetes().getValue().size() > 0) {
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Confirmar pedido")
+                SweetAlertDialog dialog=new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                        dialog.setTitleText("Confirmar pedido")
                         .setContentText("Estas seguro de que quieres comprar?")
                         .setConfirmText("Dale!")
                         .setConfirmClickListener(sweetAlertDialog -> {
                             try {
                                 vm.confirmarPedido();
+                                vm.emptyCart();
+                                dialog.dismissWithAnimation();
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+
                         })
                         .setCancelButton("No ", sDialog -> sDialog.dismissWithAnimation())
                         .show();
             } else {
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Carrito vacio")
+                SweetAlertDialog dialog=new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE);
+                        dialog.setTitleText("Carrito vacio")
                         .setContentText("El carrito esta vacio D.D ?")
                         .setConfirmText("Cierto")
-                        .setConfirmClickListener(sweetAlertDialog ->sweetAlertDialog.dismissWithAnimation())
+                        .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
                         .show();
             }
         });

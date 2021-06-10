@@ -90,6 +90,12 @@ public class CarritoViewModel extends ViewModel {
         cart.edit().putStringSet("cart",cartSet).commit();
         actualizarPaquetes();
     }
+    public void emptyCart() {
+        Usuario usuario = DataRepository.getUsuarioLogeado();
+        SharedPreferences cart= App.getContext().getSharedPreferences(usuario.getId()+usuario.getNombre(), Context.MODE_PRIVATE);
+        cart.edit().putStringSet("cart",new HashSet<String>()).commit();
+        actualizarPaquetes();
+    }
 
     public void confirmarPedido() throws ExecutionException, InterruptedException {
         Pedido pedido=new Pedido();
