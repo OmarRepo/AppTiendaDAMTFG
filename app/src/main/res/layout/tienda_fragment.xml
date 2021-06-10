@@ -20,7 +20,7 @@
             android:layout_gravity="end|bottom"
             android:backgroundTint="@color/boton_background_color"
             android:clickable="true"
-            app:srcCompat="@android:drawable/star_big_on"
+            app:srcCompat="@drawable/shopping_cart_empty_side_view"
             app:useCompatPadding="true" />
 
         <LinearLayout

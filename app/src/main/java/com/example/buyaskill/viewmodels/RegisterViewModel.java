@@ -87,7 +87,6 @@ public class RegisterViewModel extends ViewModel {
         registroUsuario.getValue().setCalle(calle.get()+","+codigoPostal.get());
     }
     public synchronized void intentarRegistro() throws JSONException {
-        Toast.makeText(App.getContext(), "Intentando registrar al usuario: "+registroUsuario.getValue().toString(), Toast.LENGTH_SHORT).show();
         registroUsuario.getValue().RegistrarUsuario(password.get(), new VolleyJSONCallback() {
             @Override
             public void onSuccessResponse(JSONObject result) {

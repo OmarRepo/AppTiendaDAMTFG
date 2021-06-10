@@ -69,6 +69,7 @@ public class PerfilFragment extends Fragment {
         //pass.setText(usu.ge);
         clickado=0;
         editarEdits=getView().findViewById(R.id.habilitar_des_editText);
+        editarEdits.setText("Editar perfil");
         editarEdits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +83,7 @@ public class PerfilFragment extends Fragment {
                     correo.setEnabled(true);
                     ciudad.setEnabled(true);
                     clickado=1;
+                    editarEdits.setText("Guardar Cambios");
                 }
                 else if(clickado==1){
                     usu.setNombre(nombre.getText().toString());
@@ -100,6 +102,7 @@ public class PerfilFragment extends Fragment {
                                 DataRepository.setUsuarioLogeado(usu);
                                 SharedPreferences sharedPref =App.getContext().getSharedPreferences("session", Context.MODE_PRIVATE);
                                 sharedPref.edit().putString("email",usu.getEmail()).apply();
+                                Toast.makeText(App.getContext(), "Usuario modificado", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             public void onErrorResponse(VolleyError error) {
@@ -109,7 +112,16 @@ public class PerfilFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                    nombre.setEnabled(false);
+                    apellido.setEnabled(false);
+                    dir.setEnabled(false);
+                    cod.setEnabled(false);
+                    fecha.setEnabled(false);
+                    tlf.setEnabled(false);
+                    correo.setEnabled(false);
+                    ciudad.setEnabled(false);
+                    editarEdits.setText("Editar perfil");
+                    clickado=0;
                 }
             }
         });

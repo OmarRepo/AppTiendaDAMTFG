@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:clickable="true"
-            android:src="@android:drawable/ic_menu_upload"
+            android:src="@drawable/tarjeta_de_credito"
             app:backgroundTint="@color/boton_background_color"
             app:useCompatPadding="true" />
 
@@ -32,15 +32,16 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             tools:context=".HomeActivity">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carritoPaquetes"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.9"
                 android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:cartData="@{viewModel.paquetes}"
-                tools:listitem="@layout/paquete_card_layout_with_remove"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/paquete_card_layout_with_remove" />
 
         </LinearLayout>
 
