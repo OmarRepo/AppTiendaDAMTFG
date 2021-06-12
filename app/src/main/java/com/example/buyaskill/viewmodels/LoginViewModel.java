@@ -70,7 +70,7 @@ public class LoginViewModel extends ViewModel {
                     }
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(App.getContext(), "Contraseña cambiada, vuelva a iniciar sesion", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(App.getContext(), "Contraseña cambiada, vuelva a iniciar sesion", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (JSONException e) {
