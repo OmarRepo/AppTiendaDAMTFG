@@ -194,7 +194,6 @@ public class Pedido implements Parcelable
             objetoPeticion.put("id",this.idPedido);
             objetoPeticion.put("action", "order_packs");
             String url = "http://pruebatiendadam.atwebpages.com/php/android/listener.php";
-            Log.i("175",objetoPeticion.toString()+this.idPedido);
             RequestQueue queue = SingletonRequestQueue.getInstance(App.getContext()).getQueue();
             CustomJsonArrayRequest request = new CustomJsonArrayRequest(Request.Method.POST, url, objetoPeticion,
                     callback::onSuccessResponse

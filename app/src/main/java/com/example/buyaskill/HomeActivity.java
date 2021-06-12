@@ -48,8 +48,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
-        Picasso.get().setIndicatorsEnabled(true);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
